@@ -18,6 +18,7 @@ public class test1
         WebDriver driver = new FirefoxDriver();
 
         driver.get("http://www.evomag.ro/");
+        
 /*
 * Go to login page
 */
