@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="18431" started-at="2015-09-23T10:33:07Z" finished-at="2015-09-23T10:33:25Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="18431" started-at="2015-09-23T10:33:07Z" finished-at="2015-09-23T10:33:25Z">
+      <class name="test1">
+        <test-method status="PASS" signature="method()[pri:0, instance:test1@2ac1fdc4]" name="method" duration-ms="18421" started-at="2015-09-23T10:33:07Z" finished-at="2015-09-23T10:33:25Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>
