@@ -5,6 +5,7 @@ import java.util.Random;
 import junit.framework.Assert;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,14 +36,6 @@ public class test1 {
 
     public void setUpFirefox() {
         firefoxDriver = new FirefoxDriver();
-    }
-
-    @Test
-    public void testName() throws Exception {
-        Random randomGenerator = new Random();
-        int telNr = randomGenerator.nextInt(100000000);
-        int length = (int) (Math.log10(telNr) + 1);
-        System.out.println(length + ' ' + telNr);
     }
 
     @Test
@@ -119,27 +112,43 @@ public class test1 {
         autClick.click();
     }
 
+    private String productNameFromList;
+
+    private String productNameFromChart;
+
     @Test
     public void addToChart() throws InterruptedException {
         createAccount();
         WebElement laptopMeniu = firefoxDriver.findElement(By
             .cssSelector(".cat-nav-tab[href*=\"laptop\"]"));
         laptopMeniu.click();
-        WebElement product = firefoxDriver.findElement(By
-            .xpath("(//*[@class='product-box']//a[@class='add'])[2]"));
-        product.click();
+        WebElement product = firefoxDriver.findElement(By.xpath("(//*[@class='product-box'])[6]/div/a"));
+        productNameFromList = product.getAttribute("title");
+        WebElement addToChart = firefoxDriver.findElement(By
+            .xpath(" (//*[@class=\"product-box\"])[6]//a[@class=\"add\"]"));
+        addToChart.click();
         Thread.sleep(1000);
-        WebElement productInChart = firefoxDriver
-            .findElement(By
-                .xpath(".//*[@class=\"cpm-product\"]//a[contains(text(),\"Yoga 500-15\")]"));
-        Assert.assertTrue(productInChart.isDisplayed());
+        WebElement productInChart = firefoxDriver.findElement(
+            // . xpath("//*[@id='cart_form']//a[contains(text(),'Yoga 500-14')]"));
+            By.cssSelector(".ct-name>p>a"));
+        productNameFromChart = productInChart.getText();
+        Assert.assertEquals("Notebook / Laptop " + productNameFromList, productNameFromChart);
+    }
+
+    @Test
+    public void removeFromChart() throws InterruptedException {
+        addToChart();
+        Thread.sleep(1000);
+        WebElement remove =
+            firefoxDriver.findElement(By.xpath("//*[@class=\"cpm-top-gc\"]/a[contains(@href,\"golestecos\")]"));
+        JavascriptExecutor js = (JavascriptExecutor) firefoxDriver;
+        js.executeScript("arguments[0].click();", remove);
+        WebElement empty =
+            firefoxDriver.findElement(By.xpath("//*[@id='cart-page-desktop']//*[contains(text(),\"gol\")]"));
+        Assert.assertTrue(empty.isDisplayed());
     }
 
     public String randomString() {
         return new BigInteger(130, random).toString(32);
     }
-
-    // login
-    // add to chart
-    // remove from
 }
