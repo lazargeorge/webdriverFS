@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 /**
@@ -25,20 +27,27 @@ public class test1 {
 
     private String psswd;
 
+    private String productNameFromList;
+
+    private String productNameFromChart;
+
     private SecureRandom random = new SecureRandom();
+
+    private WebDriverWait wait;
 
     public void setUpChrome() {
         System.setProperty("webdriver.chrome.driver",
             "C:\\Users\\V3790119\\Downloads\\chromedriver_win32\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
+        wait = new WebDriverWait(chromeDriver, 10);
 
     }
 
     public void setUpFirefox() {
         firefoxDriver = new FirefoxDriver();
+        wait = new WebDriverWait(firefoxDriver, 60);
     }
 
-    @Test
     public void clickLoginFirefox() {
         setUpFirefox();
         firefoxDriver.get("http://www.pcgarage.ro/");
@@ -48,7 +57,6 @@ public class test1 {
         autButton.click();
     }
 
-    @Test
     public void clickLoginChrome() {
         setUpChrome();
         chromeDriver.get("http://www.pcgarage.ro/");
@@ -58,25 +66,23 @@ public class test1 {
         autButton.click();
     }
 
-    @Test
     public void createAccount() throws InterruptedException {
         Random randomGenerator = new Random();
         clickLoginFirefox();
-        Thread.sleep(2000);
-        WebElement newPrenumeInput = firefoxDriver.findElement(By
-            .xpath("//*[@id='newfirstname']"));
-        WebElement newNumeInput = firefoxDriver.findElement(By
-            .xpath("//*[@id='newlastname']"));
-        WebElement newTelefonInput = firefoxDriver.findElement(By
-            .xpath("//*[@id='telephone']"));
-        WebElement newEmailInput = firefoxDriver.findElement(By
-            .xpath("//*[@id='newemail']"));
-        WebElement newParolaInput = firefoxDriver.findElement(By
-            .xpath("//*[@id='newpassword']"));
-        WebElement newParola2Input = firefoxDriver.findElement(By
-            .xpath("//*[@id='newpasswordretype']"));
-        WebElement createBtn = firefoxDriver.findElement(By
-            .xpath("//*[@id='register']//button"));
+        WebElement newPrenumeInput =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newfirstname']")));
+        WebElement newNumeInput =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newlastname']")));
+        WebElement newTelefonInput =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='telephone']")));
+        WebElement newEmailInput =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newemail']")));
+        WebElement newParolaInput =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newpassword']")));
+        WebElement newParola2Input =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newpasswordretype']")));
+        WebElement createBtn =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='register']//button")));
         newPrenumeInput.sendKeys(randomString());
         newNumeInput.sendKeys(randomString());
         newTelefonInput.sendKeys("07" + randomGenerator.nextInt(100000000));
@@ -87,36 +93,30 @@ public class test1 {
         newParola2Input.sendKeys(psswd);
         firefoxDriver.manage().window().maximize();
         createBtn.click();
-        Thread.sleep(1000);
-        WebElement accountCreated = firefoxDriver.findElement(By
-            .xpath("//div[@id='listing-right']//h1"));
+        WebElement accountCreated =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='listing-right']//h1")));
         Assert.assertTrue(accountCreated.isDisplayed());
         System.out.println("Email: " + email);
         System.out.println("Password: " + psswd);
     }
 
-    // Before this test is required to create an account
-
     @Test
     public void loginFirefox() throws InterruptedException {
+        email = "7k5t07k6imjrgjvefsk1a9nr5v@trbvm.com";
+        psswd = "m6sp2csbin8am217h1p7ru2kq2";
         clickLoginFirefox();
-        Thread.sleep(1000);
-        WebElement emailInput = firefoxDriver.findElement(By
-            .xpath("//*[@id='email']"));
+        WebElement emailInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='email']")));
         emailInput.sendKeys(email);
-        WebElement psswdInput = firefoxDriver.findElement(By
-            .xpath("//*[@id='password']"));
+        WebElement psswdInput =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='password']")));
         psswdInput.sendKeys(psswd);
-        WebElement autClick = firefoxDriver.findElement(By
-            .xpath("//*[@id='login']//button[text()=\"Autentificare\"]"));
+        WebElement autClick =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By
+                .xpath("//*[@id='login']//button[text()=\"Autentificare\"]")));
         autClick.click();
+        closeFirefox();
     }
 
-    private String productNameFromList;
-
-    private String productNameFromChart;
-
-    @Test
     public void addToChart() throws InterruptedException {
         createAccount();
         WebElement laptopMeniu = firefoxDriver.findElement(By
@@ -127,10 +127,8 @@ public class test1 {
         WebElement addToChart = firefoxDriver.findElement(By
             .xpath(" (//*[@class=\"product-box\"])[6]//a[@class=\"add\"]"));
         addToChart.click();
-        Thread.sleep(1000);
-        WebElement productInChart = firefoxDriver.findElement(
-            // . xpath("//*[@id='cart_form']//a[contains(text(),'Yoga 500-14')]"));
-            By.cssSelector(".ct-name>p>a"));
+        WebElement productInChart =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ct-name>p>a")));
         productNameFromChart = productInChart.getText();
         Assert.assertEquals("Notebook / Laptop " + productNameFromList, productNameFromChart);
     }
@@ -138,17 +136,27 @@ public class test1 {
     @Test
     public void removeFromChart() throws InterruptedException {
         addToChart();
-        Thread.sleep(1000);
+        WebElement title =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='container']//h1")));
         WebElement remove =
             firefoxDriver.findElement(By.xpath("//*[@class=\"cpm-top-gc\"]/a[contains(@href,\"golestecos\")]"));
         JavascriptExecutor js = (JavascriptExecutor) firefoxDriver;
         js.executeScript("arguments[0].click();", remove);
-        WebElement empty =
-            firefoxDriver.findElement(By.xpath("//*[@id='cart-page-desktop']//*[contains(text(),\"gol\")]"));
+        WebElement empty = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+            .xpath("//*[@id='cart-page-desktop']//*[contains(text(),\"gol\")]")));
         Assert.assertTrue(empty.isDisplayed());
+        closeFirefox();
     }
 
     public String randomString() {
         return new BigInteger(130, random).toString(32);
+    }
+
+    private void closeFirefox() {
+        firefoxDriver.close();
+    }
+
+    private void closeChrome() {
+        chromeDriver.close();
     }
 }
