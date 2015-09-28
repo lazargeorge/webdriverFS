@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="36131" started-at="2015-09-23T14:53:53Z" finished-at="2015-09-23T14:54:29Z">
+  <suite name="Default suite" duration-ms="46233" started-at="2015-09-28T17:14:40Z" finished-at="2015-09-28T17:15:26Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="36131" started-at="2015-09-23T14:53:53Z" finished-at="2015-09-23T14:54:29Z">
+    <test name="Default test" duration-ms="46233" started-at="2015-09-28T17:14:40Z" finished-at="2015-09-28T17:15:26Z">
       <class name="test1">
-        <test-method status="PASS" signature="createAccounts()[pri:0, instance:test1@79e4c792]" name="createAccounts" is-config="true" duration-ms="6139" started-at="2015-09-23T14:53:53Z" finished-at="2015-09-23T14:53:59Z">
+        <test-method status="PASS" signature="createAccounts()[pri:0, instance:test1@4c60d6e9]" name="createAccounts" is-config="true" duration-ms="1" started-at="2015-09-28T17:14:40Z" finished-at="2015-09-28T17:14:40Z">
         </test-method>
-        <test-method status="PASS" signature="fireFoxEmagCreateAccountTest()[pri:0, instance:test1@79e4c792]" name="fireFoxEmagCreateAccountTest" duration-ms="29986" started-at="2015-09-23T14:53:59Z" finished-at="2015-09-23T14:54:29Z">
+        <test-method status="PASS" signature="fireFoxEmagCreateAccountTest()[pri:0, instance:test1@4c60d6e9]" name="fireFoxEmagCreateAccountTest" duration-ms="24746" started-at="2015-09-28T17:14:40Z" finished-at="2015-09-28T17:15:04Z">
         </test-method>
-        <test-method status="PASS" signature="close()[pri:0, instance:test1@79e4c792]" name="close" is-config="true" duration-ms="0" started-at="2015-09-23T14:54:29Z" finished-at="2015-09-23T14:54:29Z">
+        <test-method status="PASS" signature="addToCartAndRemoveFromCartTest()[pri:0, instance:test1@4c60d6e9]" name="addToCartAndRemoveFromCartTest" duration-ms="21464" started-at="2015-09-28T17:15:04Z" depends-on-methods="test1.fireFoxEmagCreateAccountTest" finished-at="2015-09-28T17:15:26Z">
+        </test-method>
+        <test-method status="PASS" signature="close()[pri:0, instance:test1@4c60d6e9]" name="close" is-config="true" duration-ms="851" started-at="2015-09-28T17:15:26Z" finished-at="2015-09-28T17:15:27Z">
         </test-method>
       </class>
     </test>
