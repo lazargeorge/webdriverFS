@@ -1,5 +1,8 @@
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Properties;
 import java.util.Random;
 
 import junit.framework.Assert;
@@ -12,6 +15,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -19,9 +26,7 @@ import org.testng.annotations.Test;
  */
 public class test1 {
 
-    private WebDriver chromeDriver;
-
-    private WebDriver firefoxDriver;
+    private WebDriver driver;
 
     private String email;
 
@@ -35,33 +40,57 @@ public class test1 {
 
     private WebDriverWait wait;
 
-    public void setUpChrome() {
-        System.setProperty("webdriver.chrome.driver",
-            "C:\\Users\\V3790119\\Downloads\\chromedriver_win32\\chromedriver.exe");
-        chromeDriver = new ChromeDriver();
-        wait = new WebDriverWait(chromeDriver, 10);
+    private static Properties prop = new Properties();
 
+    public void initProp() throws Exception {
+        String propFileName = "config.properties";
+        InputStream inputStream = getClass().getClassLoader()
+            .getResourceAsStream(propFileName);
+
+        if (inputStream != null) {
+            prop.load(inputStream);
+        } else {
+            throw new FileNotFoundException("Property file '" + propFileName
+                + "' not found!");
+        }
     }
 
-    public void setUpFirefox() {
-        firefoxDriver = new FirefoxDriver();
-        wait = new WebDriverWait(firefoxDriver, 60);
+    public WebDriver getBrowser() throws Exception {
+        initProp();
+        String browser = prop.getProperty("browser");
+        switch (browser) {
+            case "FireFox":
+                return new FirefoxDriver();
+            case "Chrome":
+                System.setProperty("webdriver.chrome.driver",
+                    "C:\\Users\\V3790119\\Downloads\\chromedriver_win32\\chromedriver.exe");
+                return new ChromeDriver();
+            default:
+                return new FirefoxDriver();
+        }
+    }
+
+    @BeforeMethod
+    public void setUp() throws Exception {
+        driver = getBrowser();
+        wait = new WebDriverWait(driver, 10);
+
     }
 
     public void clickLoginFirefox() {
-        setUpFirefox();
-        firefoxDriver.get("http://www.pcgarage.ro/");
+
+        driver.get("http://www.pcgarage.ro/");
         // autButton = button to authentification page
-        WebElement autButton = firefoxDriver.findElement(By
+        WebElement autButton = driver.findElement(By
             .xpath("//*[@id='user_header']//a[text()=\"Contul meu\"]"));
         autButton.click();
     }
 
     public void clickLoginChrome() {
-        setUpChrome();
-        chromeDriver.get("http://www.pcgarage.ro/");
+
+        driver.get("http://www.pcgarage.ro/");
         // autButton = button to authentification page
-        WebElement autButton = chromeDriver.findElement(By
+        WebElement autButton = driver.findElement(By
             .xpath("//*[@id='user_header']//a[text()=\"Contul meu\"]"));
         autButton.click();
     }
@@ -91,13 +120,13 @@ public class test1 {
         psswd = randomString();
         newParolaInput.sendKeys(psswd);
         newParola2Input.sendKeys(psswd);
-        firefoxDriver.manage().window().maximize();
+        driver.manage().window().maximize();
         createBtn.click();
         WebElement accountCreated =
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='listing-right']//h1")));
         Assert.assertTrue(accountCreated.isDisplayed());
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + psswd);
+        //System.out.println("Email: " + email);
+        //System.out.println("Password: " + psswd);
     }
 
     @Test
@@ -119,12 +148,12 @@ public class test1 {
 
     public void addToChart() throws InterruptedException {
         createAccount();
-        WebElement laptopMeniu = firefoxDriver.findElement(By
+        WebElement laptopMeniu = driver.findElement(By
             .cssSelector(".cat-nav-tab[href*=\"laptop\"]"));
         laptopMeniu.click();
-        WebElement product = firefoxDriver.findElement(By.xpath("(//*[@class='product-box'])[6]/div/a"));
+        WebElement product = driver.findElement(By.xpath("(//*[@class='product-box'])[6]/div/a"));
         productNameFromList = product.getAttribute("title");
-        WebElement addToChart = firefoxDriver.findElement(By
+        WebElement addToChart = driver.findElement(By
             .xpath(" (//*[@class=\"product-box\"])[6]//a[@class=\"add\"]"));
         addToChart.click();
         WebElement productInChart =
@@ -139,8 +168,8 @@ public class test1 {
         WebElement title =
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='container']//h1")));
         WebElement remove =
-            firefoxDriver.findElement(By.xpath("//*[@class=\"cpm-top-gc\"]/a[contains(@href,\"golestecos\")]"));
-        JavascriptExecutor js = (JavascriptExecutor) firefoxDriver;
+            driver.findElement(By.xpath("//*[@class=\"cpm-top-gc\"]/a[contains(@href,\"golestecos\")]"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", remove);
         WebElement empty = wait.until(ExpectedConditions.visibilityOfElementLocated(By
             .xpath("//*[@id='cart-page-desktop']//*[contains(text(),\"gol\")]")));
@@ -152,11 +181,9 @@ public class test1 {
         return new BigInteger(130, random).toString(32);
     }
 
+    @AfterMethod
     private void closeFirefox() {
-        firefoxDriver.close();
+        driver.close();
     }
 
-    private void closeChrome() {
-        chromeDriver.close();
-    }
 }
