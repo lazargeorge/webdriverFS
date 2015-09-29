@@ -7,18 +7,13 @@ import java.util.Random;
 
 import junit.framework.Assert;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -27,6 +22,16 @@ import org.testng.annotations.Test;
 public class test1 {
 
     private WebDriver driver;
+
+    private HomePage homePage;
+
+    private LoginPage loginPage;
+
+    private CreateAccountPage createAccountPage;
+
+    private AddToChartPage addToChartPage;
+
+    private RemoveFromChartPage removeFromChartPage;
 
     private String email;
 
@@ -38,7 +43,7 @@ public class test1 {
 
     private SecureRandom random = new SecureRandom();
 
-    private WebDriverWait wait;
+    // private WebDriverWait wait;
 
     private static Properties prop = new Properties();
 
@@ -73,107 +78,63 @@ public class test1 {
     @BeforeMethod
     public void setUp() throws Exception {
         driver = getBrowser();
-        wait = new WebDriverWait(driver, 10);
-
+        // wait = new WebDriverWait(driver, 10);
     }
 
-    public void clickLoginFirefox() {
-
+    public void clickLogin() {
+        homePage = PageFactory.initElements(driver, HomePage.class);
         driver.get("http://www.pcgarage.ro/");
         // autButton = button to authentification page
-        WebElement autButton = driver.findElement(By
-            .xpath("//*[@id='user_header']//a[text()=\"Contul meu\"]"));
-        autButton.click();
-    }
-
-    public void clickLoginChrome() {
-
-        driver.get("http://www.pcgarage.ro/");
-        // autButton = button to authentification page
-        WebElement autButton = driver.findElement(By
-            .xpath("//*[@id='user_header']//a[text()=\"Contul meu\"]"));
-        autButton.click();
+        homePage.getAutButton().click();
     }
 
     public void createAccount() throws InterruptedException {
+        createAccountPage = PageFactory.initElements(driver, CreateAccountPage.class);
         Random randomGenerator = new Random();
-        clickLoginFirefox();
-        WebElement newPrenumeInput =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newfirstname']")));
-        WebElement newNumeInput =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newlastname']")));
-        WebElement newTelefonInput =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='telephone']")));
-        WebElement newEmailInput =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newemail']")));
-        WebElement newParolaInput =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newpassword']")));
-        WebElement newParola2Input =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='newpasswordretype']")));
-        WebElement createBtn =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='register']//button")));
-        newPrenumeInput.sendKeys(randomString());
-        newNumeInput.sendKeys(randomString());
-        newTelefonInput.sendKeys("07" + randomGenerator.nextInt(100000000));
+        clickLogin();
+        createAccountPage.getNewPrenumeInput().sendKeys(randomString());
+        createAccountPage.getNewNumeInput().sendKeys(randomString());
+        createAccountPage.getNewTelefonInput().sendKeys("07" + randomGenerator.nextInt(100000000));
         email = randomString() + "@trbvm.com";
-        newEmailInput.sendKeys(email);
+        createAccountPage.getNewEmailInput().sendKeys(email);
         psswd = randomString();
-        newParolaInput.sendKeys(psswd);
-        newParola2Input.sendKeys(psswd);
+        createAccountPage.getNewParolaInput().sendKeys(psswd);
+        createAccountPage.getNewParola2Input().sendKeys(psswd);
         driver.manage().window().maximize();
-        createBtn.click();
-        WebElement accountCreated =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='listing-right']//h1")));
-        Assert.assertTrue(accountCreated.isDisplayed());
-        //System.out.println("Email: " + email);
-        //System.out.println("Password: " + psswd);
+        createAccountPage.getCreateBtn().click();
+        Assert.assertTrue(createAccountPage.getAccountCreated().isDisplayed());
+        // System.out.println("Email: " + email);
+        // System.out.println("Password: " + psswd);
     }
 
     @Test
-    public void loginFirefox() throws InterruptedException {
+    public void login() throws InterruptedException {
+        loginPage = PageFactory.initElements(driver, LoginPage.class);
         email = "7k5t07k6imjrgjvefsk1a9nr5v@trbvm.com";
         psswd = "m6sp2csbin8am217h1p7ru2kq2";
-        clickLoginFirefox();
-        WebElement emailInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='email']")));
-        emailInput.sendKeys(email);
-        WebElement psswdInput =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='password']")));
-        psswdInput.sendKeys(psswd);
-        WebElement autClick =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//*[@id='login']//button[text()=\"Autentificare\"]")));
-        autClick.click();
-        closeFirefox();
+        clickLogin();
+        loginPage.getEmailInput().sendKeys(email);
+        loginPage.getPsswdInput().sendKeys(psswd);
+        loginPage.getAutClick().click();
     }
 
     public void addToChart() throws InterruptedException {
+        addToChartPage = PageFactory.initElements(driver, AddToChartPage.class);
         createAccount();
-        WebElement laptopMeniu = driver.findElement(By
-            .cssSelector(".cat-nav-tab[href*=\"laptop\"]"));
-        laptopMeniu.click();
-        WebElement product = driver.findElement(By.xpath("(//*[@class='product-box'])[6]/div/a"));
-        productNameFromList = product.getAttribute("title");
-        WebElement addToChart = driver.findElement(By
-            .xpath(" (//*[@class=\"product-box\"])[6]//a[@class=\"add\"]"));
-        addToChart.click();
-        WebElement productInChart =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ct-name>p>a")));
-        productNameFromChart = productInChart.getText();
+        addToChartPage.getLaptopMeniu().click();
+        productNameFromList = addToChartPage.getProduct().getAttribute("title");
+        addToChartPage.getAddToChart().click();
+        productNameFromChart = addToChartPage.getProductInChart().getText();
         Assert.assertEquals("Notebook / Laptop " + productNameFromList, productNameFromChart);
     }
 
     @Test
     public void removeFromChart() throws InterruptedException {
+        removeFromChartPage = PageFactory.initElements(driver, RemoveFromChartPage.class);
         addToChart();
-        WebElement title =
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='container']//h1")));
-        WebElement remove =
-            driver.findElement(By.xpath("//*[@class=\"cpm-top-gc\"]/a[contains(@href,\"golestecos\")]"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", remove);
-        WebElement empty = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-            .xpath("//*[@id='cart-page-desktop']//*[contains(text(),\"gol\")]")));
-        Assert.assertTrue(empty.isDisplayed());
+        js.executeScript("arguments[0].click();", removeFromChartPage.getRemove());
+        Assert.assertTrue(removeFromChartPage.getEmpty().isDisplayed());
         closeFirefox();
     }
 
