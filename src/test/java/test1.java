@@ -2,6 +2,7 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,7 @@ public class test1 {
 	public WebDriver ff = new FirefoxDriver();
 	private SecureRandom random = new SecureRandom();
 	private Random nr = new Random();
+	int ok;
 
 	public boolean elementExist(String id) {
 		try {
@@ -74,9 +76,9 @@ public class test1 {
 	public String genID() {
 		return new BigInteger(130, random).toString(32);
 	}
-
+	
 	@Test
-	public void TestNewUser() throws InterruptedException {
+	public void TestNewUser() {
 		/**
 		 * Create New User
 		 **/
@@ -90,7 +92,7 @@ public class test1 {
 		enterNume.sendKeys(genID());
 		WebElement enterPrenume = ff.findElement(By.xpath("//input[@name='lastname']"));
 		enterPrenume.sendKeys(genID());
-
+		
 		WebElement enterEmail = ff.findElement(By.xpath("//input[@name='email_address']"));
 		enterEmail.sendKeys(mail + "@yopmail.com");
 
@@ -104,7 +106,7 @@ public class test1 {
 		enterAdresa.sendKeys(genID());
 		Select enterJudet = new Select(ff.findElement(By.xpath("//select[@name='entry_suburb']")));
 		enterJudet.selectByValue("Iasi");
-		Thread.sleep(1000);
+		ff.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Select enterLocalitate = new Select(ff.findElement(By.xpath("//select[@name='localitati']")));
 		enterLocalitate.selectByValue("Iasi");
 		WebElement clickCreazaCont = ff.findElement(By.xpath("//input[@title=' Creeaza Cont ']"));
