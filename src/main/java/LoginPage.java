@@ -1,9 +1,10 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends PageObject {
-    @FindBy(id="email")
+public class LoginPage {
+    @FindBy(id = "email")
     private WebElement emailInput;
 
     @FindBy(id = "password")
@@ -12,8 +13,11 @@ public class LoginPage extends PageObject {
     @FindBy(xpath = "//*[@id='login']//button[text()=\"Autentificare\"]")
     private WebElement autClick;
 
+    private WebDriver driver;
+    private HomePage homePage;
+
     public LoginPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
     }
 
     public WebElement getEmailInput() {
@@ -28,4 +32,11 @@ public class LoginPage extends PageObject {
         return autClick;
     }
 
+    public void login(String email, String psswd) {
+        homePage = PageFactory.initElements(driver, HomePage.class);
+        homePage.clickLogin();
+        getEmailInput().sendKeys(email);
+        getPsswdInput().sendKeys(psswd);
+        getAutClick().click();
+    }
 }

@@ -1,8 +1,11 @@
+import junit.framework.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class AddToChartPage extends PageObject {
+public class AddToChartPage {
     @FindBy(css = ".cat-nav-tab[href*=\"laptop\"]")
     private WebElement laptopMeniu;
 
@@ -15,8 +18,11 @@ public class AddToChartPage extends PageObject {
     @FindBy(css = ".ct-name>p>a")
     private WebElement productInChart;
 
+    private WebDriver driver;
+    private RemoveFromChartPage removeFromChartPage;
+
     public AddToChartPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
     }
 
     public WebElement getLaptopMeniu() {
@@ -33,5 +39,15 @@ public class AddToChartPage extends PageObject {
 
     public WebElement getProductInChart() {
         return productInChart;
+    }
+    
+    public void addToChart() throws InterruptedException {
+        getLaptopMeniu().click();
+        String productNameFromList = getProduct().getAttribute("title");
+        getAddToChart().click();
+        String productNameFromChart = getProductInChart().getText();
+        Assert.assertEquals("Notebook / Laptop " + productNameFromList, productNameFromChart);
+        removeFromChartPage = PageFactory.initElements(driver, RemoveFromChartPage.class);
+        removeFromChartPage.removeFromChart();
     }
 }

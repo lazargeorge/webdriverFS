@@ -1,8 +1,12 @@
+import junit.framework.Assert;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class RemoveFromChartPage extends PageObject {
+public class RemoveFromChartPage {
+
     @FindBy(xpath = "//*[@id='container']//h1")
     private WebElement title;
 
@@ -12,8 +16,10 @@ public class RemoveFromChartPage extends PageObject {
     @FindBy(xpath = "//*[@id='cart-page-desktop']//*[contains(text(),\"gol\")]")
     private WebElement empty;
 
+    private WebDriver driver;
+
     public RemoveFromChartPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
     }
 
     public WebElement getTitle() {
@@ -26,5 +32,11 @@ public class RemoveFromChartPage extends PageObject {
 
     public WebElement getEmpty() {
         return empty;
+    }
+
+    public void removeFromChart() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", getRemove());
+        Assert.assertTrue(getEmpty().isDisplayed());
     }
 }
