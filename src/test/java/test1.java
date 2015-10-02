@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -18,10 +19,8 @@ import org.testng.annotations.Test;
  */
 
 public class test1 {
-	public WebDriver ff = new FirefoxDriver();
-	private SecureRandom random = new SecureRandom();
-	private Random nr = new Random();
-	int ok;
+
+	public WebDriver ff;
 
 	public boolean elementExist(String id) {
 		try {
@@ -36,9 +35,9 @@ public class test1 {
 	@BeforeTest
 	/**
 	 * Open FireFox
-	 * 
 	 */
-	public void StartFirefox() {
+	public void startFirefox() {
+		ff = new FirefoxDriver();
 		ff.get("http://www.oktal.ro/");
 	}
 
@@ -47,7 +46,7 @@ public class test1 {
 	 * Click on Autentificare, Enter user/pass, Add 1st Element to cart, Remove
 	 * from cart, Click on Deconectare
 	 */
-	public void TestLoginAddCartDisconnect() {
+	public void testLoginAddCartDisconnect() {
 		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
 		login.click();
 		WebElement EnterEmail = ff.findElement(By.id("email_address"));
@@ -74,25 +73,29 @@ public class test1 {
 	}
 
 	public String genID() {
+		SecureRandom random = new SecureRandom();
 		return new BigInteger(130, random).toString(32);
 	}
-	
+
 	@Test
-	public void TestNewUser() {
+	public void testNewUser() {
 		/**
 		 * Create New User
 		 **/
 
 		String pwd = genID();
 		String mail = genID();
-
+		Random nr = new Random();
+		
+		ff.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
 		login.click();
 		WebElement enterNume = ff.findElement(By.xpath("//input[@name='firstname']"));
 		enterNume.sendKeys(genID());
 		WebElement enterPrenume = ff.findElement(By.xpath("//input[@name='lastname']"));
 		enterPrenume.sendKeys(genID());
-		
+
 		WebElement enterEmail = ff.findElement(By.xpath("//input[@name='email_address']"));
 		enterEmail.sendKeys(mail + "@yopmail.com");
 
@@ -106,7 +109,6 @@ public class test1 {
 		enterAdresa.sendKeys(genID());
 		Select enterJudet = new Select(ff.findElement(By.xpath("//select[@name='entry_suburb']")));
 		enterJudet.selectByValue("Iasi");
-		ff.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Select enterLocalitate = new Select(ff.findElement(By.xpath("//select[@name='localitati']")));
 		enterLocalitate.selectByValue("Iasi");
 		WebElement clickCreazaCont = ff.findElement(By.xpath("//input[@title=' Creeaza Cont ']"));
@@ -115,5 +117,13 @@ public class test1 {
 		System.out.println(pwd);
 
 		Assert.assertEquals(elementExist("//h2[text()='Contul tau a fost creat !']"), true, "verificarcreareaccont");
+	}
+
+	@AfterTest
+	/**
+	 * Close FireFox
+	 */
+	public void closeFirefox() {
+		ff.close();
 	}
 }
