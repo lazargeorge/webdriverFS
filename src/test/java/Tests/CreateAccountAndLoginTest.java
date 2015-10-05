@@ -1,40 +1,19 @@
 package Tests;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.testng.annotations.AfterGroups;
-import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
 import junit.framework.Assert;
+import pageObjects.HomePage;
+import pageObjects.LoginPage;
 
 public class CreateAccountAndLoginTest extends Setup
 {
     WebDriver driver = new FirefoxDriver();
     int random = 100 + (int) (Math.random() * ((10000 - 100) + 1));
-
-    @BeforeGroups
-    public void setupEnvironment()
-    {
-        FirefoxBinary binary = new FirefoxBinary(new File("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"));
-        FirefoxProfile profile = new FirefoxProfile();
-        WebDriver driver = new FirefoxDriver(binary, profile);
-        driver.get("http://www.evomag.ro/");
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-        if (driver.getCurrentUrl() != "http://www.evomag.ro/")
-        {
-            driver.findElement(By.xpath(".//*[@id='header']/div[1]/a/img")).click();
-            System.out.println("The page has a redirect\n");
-        }
-    }
 
     /**
      * Test for creating an account
@@ -43,21 +22,19 @@ public class CreateAccountAndLoginTest extends Setup
      * Step 3: Check the login by asserting page element (Contul meu -> name of the account)
      */
 
-    @Test(groups = "create login")
+    @Test
     public void CreateAccountTest() throws Exception
     {
         driver.get("http://www.evomag.ro");
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         String nume_generat = "Sandel" + random;
-        driver.findElement(By.cssSelector("li>a[href*=auth]")).click();
-        driver.findElement(By.cssSelector("#RegisterClientForm_FullName")).sendKeys(nume_generat);
-        driver.findElement(By.cssSelector("#RegisterClientForm_Email")).sendKeys(nume_generat + "@test.com");
-        driver.findElement(By.cssSelector("#RegisterClientForm_Password")).sendKeys("testtesttest");
-        driver.findElement(By.name("yt0")).click();
+        HomePage.link_ContulMeu(driver).click();
+        LoginPage.name(driver).sendKeys(nume_generat);
+        LoginPage.email_create(driver).sendKeys(nume_generat + "@test.com");
+        LoginPage.password_create(driver).sendKeys("testtesttest");
+        LoginPage.register_button(driver).click();
 
-        WebElement sel_cont = driver.findElement(By.cssSelector(".c_header em"));
-        String nume_cont = sel_cont.getText();
-        Assert.assertEquals(nume_generat, nume_cont);
+        Assert.assertEquals(nume_generat, HomePage.nume_ContulMeu(driver).getText());
 
     }
 
@@ -69,16 +46,16 @@ public class CreateAccountAndLoginTest extends Setup
      * Step 4: Check that an alert pops up with a line of text for each error
      */
 
-    @Test(groups = "create login")
+    @Test
     public void NegativeCreateAccountTest() throws Exception
     {
         driver.get("http://www.evomag.ro");
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.findElement(By.cssSelector("li>a[href*=auth]")).click();
-        driver.findElement(By.cssSelector("#RegisterClientForm_FullName")).sendKeys("1324");
-        driver.findElement(By.cssSelector("#RegisterClientForm_Email")).sendKeys("1234");
-        driver.findElement(By.cssSelector("#RegisterClientForm_Password")).sendKeys("1234");
-        driver.findElement(By.name("yt0")).click();
+        HomePage.link_ContulMeu(driver).click();
+        LoginPage.name(driver).sendKeys("1324");
+        LoginPage.email_create(driver).sendKeys("1234");
+        LoginPage.password_create(driver).sendKeys("1234");
+        LoginPage.register_button(driver).click();
 
         String alert_text = driver.switchTo().alert().getText();
         driver.switchTo().alert().accept();
@@ -86,9 +63,4 @@ public class CreateAccountAndLoginTest extends Setup
                 alert_text);
     }
 
-    @AfterGroups
-    public void closeEverything()
-    {
-        driver.close();
-    }
 }
