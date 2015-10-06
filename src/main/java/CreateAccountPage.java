@@ -2,14 +2,16 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Random;
 
-import junit.framework.Assert;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-public class CreateAccountPage {
+public class CreateAccountPage extends LoadableComponent<CreateAccountPage> {
 
     @FindBy(id = "newfirstname")
     private WebElement newPrenumeInput;
@@ -37,12 +39,14 @@ public class CreateAccountPage {
 
     private WebDriver driver;
 
-    private SecureRandom random = new SecureRandom();
+    private WebDriverWait wait;
 
-    private AddToChartPage addToChartPage;
+    private SecureRandom random = new SecureRandom();
 
     public CreateAccountPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, 10);
     }
 
     public WebElement getNewPrenumeInput() {
@@ -91,13 +95,38 @@ public class CreateAccountPage {
         getCreateBtn().click();
         // System.out.println("Email: " + email);
         // System.out.println("Password: " + psswd);
-        Assert.assertTrue("Account not created", getAccountCreated().isDisplayed());
-        addToChartPage = PageFactory.initElements(driver, AddToChartPage.class);
-        addToChartPage.addToChart();
+    }
+
+    public void createAccount(String prenume, String nume, String telefon, String email, String psswd) {
+        getNewPrenumeInput().sendKeys(prenume);
+        getNewNumeInput().sendKeys(nume);
+        getNewTelefonInput().sendKeys(telefon);
+        getNewEmailInput().sendKeys(email);
+        getNewParolaInput().sendKeys(psswd);
+        getNewParola2Input().sendKeys(psswd);
+        driver.manage().window().maximize();
+        getCreateBtn().click();
     }
 
     public String randomString() {
         return new BigInteger(130, random).toString(32);
+    }
+
+    @Override
+    protected void load() {
+        driver.get("https://www.pcgarage.ro/autentificare/");
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        wait.until(ExpectedConditions.visibilityOf(getNewPrenumeInput()));
+        System.out.println("Create account: prenume is displayed? " + getNewPrenumeInput().isDisplayed());
+        Assert.assertTrue(getNewPrenumeInput().isDisplayed());
+        System.out.println("Create account: nume is displayed? " + getNewNumeInput().isDisplayed());
+        Assert.assertTrue(getNewNumeInput().isDisplayed());
+        System.out.println("Create account: email is displayed? " + getNewEmailInput().isDisplayed());
+        Assert.assertTrue(getNewEmailInput().isDisplayed());
     }
 
 }
