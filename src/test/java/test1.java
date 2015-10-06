@@ -1,11 +1,18 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 import junit.framework.Assert;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 
 /**
  * Modified by Sergiu Vidrascu on 21/09/15.
@@ -81,9 +88,20 @@ public class test1 {
         createAccountPage.createAccount(prenume, nume, telefon, email, psswd);
         Assert.assertTrue("Account not created", createAccountPage.getAccountCreated().isDisplayed());
     }
+    
+    @Test
+    public void testScreenshot() {
+        Assert.assertTrue(false);
+    }
 
     @AfterMethod
-    private void closeFirefox() {
+    private void closeFirefox(ITestResult testResult) throws IOException {
+        if (testResult.getStatus() == ITestResult.FAILURE)
+        {
+            System.out.println(testResult.getStatus());
+            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
+            FileUtils.copyFile(scrFile, new File("D:\\testScreenShot.jpg"));
+        }
         driver.close();
     }
 
