@@ -8,7 +8,6 @@
           <include name="addToCartAndRemoveFromCartTest"/>
           <include name="fireFoxEmagCreateAccountTest"/>
           <include name="createAccounts"/>
-          <include name="close"/>
         </methods>
       </class>
     </classes>
