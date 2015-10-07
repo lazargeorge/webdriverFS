@@ -16,6 +16,9 @@ public class LoginPage extends LoadableComponent<LoginPage> {
 
     @FindBy(xpath = "//*[@id='login']//button[text()=\"Autentificare\"]")
     private WebElement autClick;
+    
+    @FindBy(xpath = "//*[@id=\"listing-right\"]/h1")
+    private WebElement hello;
 
     private WebDriver driver;
 
@@ -37,6 +40,10 @@ public class LoginPage extends LoadableComponent<LoginPage> {
 
     public WebElement getAutClick() {
         return autClick;
+    }
+    
+    public WebElement getHello() {
+        return hello;
     }
 
     public void login(String email, String psswd) {

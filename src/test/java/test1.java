@@ -1,25 +1,13 @@
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 import junit.framework.Assert;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 
 /**
  * Modified by Sergiu Vidrascu on 21/09/15.
  */
-public class test1 {
-
-    private WebDriver driver;
+public class test1 extends GetProperties {
 
     private HomePage homePage;
 
@@ -27,23 +15,9 @@ public class test1 {
 
     private CreateAccountPage createAccountPage;
 
-    private AddToChartPage addToChartPage;
-
-    private RemoveFromChartPage removeFromChartPage;
-
-    private Removed removed;
-
     private String email;
 
     private String psswd;
-
-    private GetProperties prop = new GetProperties();
-
-    @BeforeMethod
-    public void setUp() throws Exception {
-        driver = prop.getBrowser();
-        driver.get("http://www.pcgarage.ro/");
-    }
 
     @Test
     public void login() throws InterruptedException {
@@ -52,26 +26,11 @@ public class test1 {
         loginPage = new LoginPage(driver).get();
         email = "7k5t07k6imjrgjvefsk1a9nr5v@trbvm.com";
         psswd = "m6sp2csbin8am217h1p7ru2kq2";
+        Assert.assertTrue(loginPage.getEmailInput().isDisplayed());
+        Assert.assertTrue(loginPage.getPsswdInput().isDisplayed());
+        Assert.assertEquals("Autentificare", loginPage.getAutClick().getText());
         loginPage.login(email, psswd);
-    }
-
-    @Test
-    public void fullPath() throws InterruptedException {
-        homePage = new HomePage(driver).get();
-        homePage.clickLogin();
-        createAccountPage = new CreateAccountPage(driver).get();
-        createAccountPage.createAccount();
-        Assert.assertTrue("Account not created", createAccountPage.getAccountCreated().isDisplayed());
-        addToChartPage = new AddToChartPage(driver).get();
-        addToChartPage.getLaptopMeniu().click();
-        String productNameFromList = addToChartPage.getProduct().getAttribute("title");
-        addToChartPage.addToChart();
-        String productNameFromChart = addToChartPage.getProductInChart().getText();
-        Assert.assertTrue(productNameFromChart.contains(productNameFromList));
-        removeFromChartPage = new RemoveFromChartPage(driver).get();
-        removeFromChartPage.removeFromChart();
-        removed = new Removed(driver).get();
-        Assert.assertTrue(removed.getEmpty().isDisplayed());
+        Assert.assertEquals("Salut d8v7rntmdri5k8igd7a8u0kg8d!", loginPage.getHello().getText());
     }
 
     @Test
@@ -88,21 +47,10 @@ public class test1 {
         createAccountPage.createAccount(prenume, nume, telefon, email, psswd);
         Assert.assertTrue("Account not created", createAccountPage.getAccountCreated().isDisplayed());
     }
-    
-    @Test
-    public void testScreenshot() {
-        Assert.assertTrue(false);
-    }
 
-    @AfterMethod
-    private void closeFirefox(ITestResult testResult) throws IOException {
-        if (testResult.getStatus() == ITestResult.FAILURE)
-        {
-            System.out.println(testResult.getStatus());
-            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
-            FileUtils.copyFile(scrFile, new File("D:\\testScreenShot.jpg"));
-        }
-        driver.close();
-    }
+//     @Test
+//     public void testScreenshot() {
+//     Assert.assertTrue(false);
+//     }
 
 }
