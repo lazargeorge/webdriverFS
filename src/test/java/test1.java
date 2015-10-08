@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
@@ -25,10 +26,10 @@ public class test1 extends Base
     {
         generateEmail();
         generatePass();
-        nrProduse=0;
+        nrProduse = 0;
         System.out.println(rndEmail);
         System.out.println(rndPass);
-        setDriver("Fire_Fox");
+
     }
 
     @AfterSuite
@@ -36,25 +37,23 @@ public class test1 extends Base
     {
         driver.quit();
     }
- 
-  
+
     /**
      * Verify if name is good
      */
     private void verificareUsername(String username)
     {
         driver.get("http://www.emag.ro");
-        WebElement user = driver.findElement(By.xpath("//span[text()=\""+username+"\"]"));
+        WebElement user = driver.findElement(By.xpath("//span[text()=\"" + username + "\"]"));
         System.out.println(user.getText());
         Assert.assertEquals(username, user.getText());
     }
-  
+
     @Test(dependsOnMethods = { "fireFoxEmagCreateAccountTest" })
     public void addToCartAndRemoveFromCartTest()
     {
 
-       
-       
+        setDriver("Fire_Fox");
         DefaultPage defaultPage = new DefaultPage();
 
         /*
@@ -81,9 +80,9 @@ public class test1 extends Base
         /*
          * remove the items from cart and check
          */
-       
+
         defaultPage.removeFromCart(produse[0], 0);
-        
+
         if (existsElement("//p[@class=\"avertisment\"]"))
             Assert.assertEquals(1, 1, "verificare stergere cos");
         else
@@ -103,15 +102,16 @@ public class test1 extends Base
     @Test
     public void fireFoxEmagCreateAccountTest() throws InterruptedException
     {
-        CreateAccountPage createPage = new CreateAccountPage();
+        setDriver("Fire_Fox");
+        CreateAccountPage createPage = PageFactory.initElements(driver, CreateAccountPage.class);
         createPage.createAccount();
-        DefaultPage defaultPage = new DefaultPage();
+        DefaultPage defaultPage = PageFactory.initElements(driver, DefaultPage.class);
         defaultPage.logout();
-        LoginPage loginPage = new LoginPage();
-        loginPage.login(rndEmail,rndPass);
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+        loginPage.login(rndEmail, rndPass);
         verificareUsername("asdf guy");
         defaultPage.logout();
-        verificationEmail(rndEmail);    
+        verificationEmail(rndEmail);
 
     }
 

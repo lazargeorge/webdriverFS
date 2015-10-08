@@ -1,13 +1,26 @@
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 public class DefaultPage extends Base
 {
 
-    DefaultPage()
+    @FindBy(how = How.ID, id = "emg-user-menu")
+    WebElement dropDownMenu;
+    @FindBy(how = How.CLASS_NAME, className = "user-logout-icon")
+    WebElement logout;
+    @FindBy(how = How.ID, id = "add-to-cart-submit")
+    WebElement addToCart;
+    @FindBy(how = How.CLASS_NAME, className = "emg-button btn-change-warranty")
+    WebElement changeWarranty;
+    @FindBy(how = How.NAME, name = "service-parent-id")
+    WebElement produs;
+    @FindBy(how = How.ID, id = "yes")
+    WebElement yesBtn;
+
+    public DefaultPage()
     {
         driver.get("http://www.emag.ro");
     }
@@ -17,21 +30,18 @@ public class DefaultPage extends Base
      */
     public void logout()
     {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Actions mouseHover = new Actions(driver);
-        mouseHover.moveToElement(driver.findElement(By.xpath("//figure[@id=\"emg-user-menu\"]"))).build().perform();
-        WebElement logout = driver.findElement(By.xpath("//div[@class=\"user-logout-icon\"]"));
+        mouseHover.moveToElement(dropDownMenu).build().perform();
         logout.click();
     }
 
     public void addToCart()
     {
-        WebElement produs = driver.findElement(By.xpath("//input[@name=\"service_parrent_id\"]"));
         produse[nrProduse] = produs.getAttribute("value");
         nrProduse++;
-        driver.findElement(By.xpath("//button[@id=\"add-to-cart-submit\"]")).click();
+        addToCart.click();
         if (existsElement("//button[@class=\"emg-button btn-change-warranty\"]"))
-            driver.findElement(By.xpath("//button[@class=\"emg-button btn-change-warranty\"]")).click();
+            changeWarranty.click();
     }
 
     public void removeFromCart(String id, int pozitieProdus)
@@ -39,7 +49,7 @@ public class DefaultPage extends Base
 
         WebElement remove = driver.findElement(By.xpath("//div[contains(@onclick,\"" + id + "\")]/img"));
         remove.click();
-        driver.findElement(By.xpath("//div[@id=\"yes\"]")).click();
+        yesBtn.click();
 
         for (int i = pozitieProdus; i <= nrProduse - 1; i++)
         {

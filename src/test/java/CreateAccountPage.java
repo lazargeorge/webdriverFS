@@ -1,14 +1,26 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 public class CreateAccountPage extends Base
 {
 
+    @FindBy(how = How.ID, id = "r_name")
+    WebElement name;
+    @FindBy(how = How.ID, id = "r_email")
+    WebElement emailElement;
+    @FindBy(how = How.ID, id = "r_password")
+    WebElement passElement;
+    @FindBy(how = How.ID, id = "rc_password")
+    WebElement rcpass;
+    @FindBy(how = How.ID, id = "ctrigger")
+    WebElement acceptTerms;
+    @FindBy(how = How.XPATH, xpath = "//input[@type=\"image\"]")
+    WebElement submitBtn;
+
     public CreateAccountPage()
     {
-        driver.get("http://www.emag.ro");
-        driver.findElement(By.xpath("//figure[@id=\"emg-user-menu\"]/figcaption")).click();
-        driver.findElement(By.xpath("//img[@src=\"https://s1emagst.akamaized.net/layout/ro/images/login_layout/newaccount-button.png?v3\"]")).click();
+        driver.get("https://www.emag.ro/user/register?ref=ssi_login");
     }
 
     /**
@@ -16,14 +28,6 @@ public class CreateAccountPage extends Base
      */
     public void createAccount(String username, String email, String pass)
     {
-
-        WebElement name = driver.findElement(By.xpath("//input[@id=\"r_name\"]"));
-        WebElement emailElement = driver.findElement(By.xpath("//input[@id=\"r_email\"]"));
-        WebElement passElement = driver.findElement(By.xpath("//input[@id=\"r_password\"]"));
-        WebElement rcpass = driver.findElement(By.xpath("//input[@id=\"rc_password\"]"));
-        WebElement acceptTerms = driver.findElement(By.xpath("//span[@id=\"ctrigger\"]"));
-        WebElement submitBtn = driver.findElement(By.xpath("//input[@type=\"image\"]"));
-
         name.sendKeys(username);
         emailElement.sendKeys(email);
         passElement.sendKeys(pass);
@@ -37,13 +41,6 @@ public class CreateAccountPage extends Base
      */
     public void createAccount()
     {
-        WebElement name = driver.findElement(By.xpath("//input[@id=\"r_name\"]"));
-        WebElement emailElement = driver.findElement(By.xpath("//input[@id=\"r_email\"]"));
-        WebElement passElement = driver.findElement(By.xpath("//input[@id=\"r_password\"]"));
-        WebElement rcpass = driver.findElement(By.xpath("//input[@id=\"rc_password\"]"));
-        WebElement acceptTerms = driver.findElement(By.xpath("//span[@id=\"ctrigger\"]"));
-        WebElement submitBtn = driver.findElement(By.xpath("//input[@type=\"image\"]"));
-
         name.sendKeys("asdf guy");
         emailElement.sendKeys(rndEmail);
         passElement.sendKeys(rndPass);

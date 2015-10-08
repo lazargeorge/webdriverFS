@@ -1,25 +1,24 @@
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 public class LoginPage extends Base
 {
 
-    LoginPage()
+    @FindBy(how = How.ID, id = "r_email")
+    WebElement loginEmail;
+    @FindBy(how = How.ID, id = "r_password")
+    WebElement loginPass;
+    @FindBy(how = How.XPATH, xpath = "//input[@type=\"image\"]")
+    WebElement loginSubmit;
+
+    public LoginPage()
     {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://www.emag.ro");
-        driver.findElement(By.xpath("//figure[@id=\"emg-user-menu\"]/figcaption")).click();
+        driver.get("http://www.emag.ro/user/login");
     }
 
     public void login(String username, String pass)
     {
-
-        WebElement loginEmail = driver.findElement(By.xpath("//input[@id=\"r_email\"]"));
-        WebElement loginPass = driver.findElement(By.xpath("//input[@id=\"r_password\"]"));
-        WebElement loginSubmit = driver.findElement(By.xpath("//input[@type=\"image\"]"));
-
         loginEmail.sendKeys(username);
         loginPass.sendKeys(pass);
         loginSubmit.click();
