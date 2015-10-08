@@ -7,7 +7,6 @@
         <methods>
           <include name="fireFoxEmagCreateAccountTest"/>
           <include name="createAccounts"/>
-          <include name="close"/>
         </methods>
       </class>
     </classes>

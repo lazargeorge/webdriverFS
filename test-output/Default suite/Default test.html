@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Oct 08 14:13:48 GMT+02:00 2015</td>
+<td>Started on:</td><td>Thu Oct 08 15:05:59 GMT+02:00 2015</td>
 </tr>
-<tr><td>Total time:</td><td>16 seconds (16365 ms)</td>
+<tr><td>Total time:</td><td>14 seconds (14294 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,15 +76,15 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='test1.fireFoxEmagCreateAccountTest()'><b>fireFoxEmagCreateAccountTest</b><br>Test class: test1</td>
-<td><div><pre>org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;r_email&quot;}
-Command duration or timeout: 2.66 seconds
+<td><div><pre>org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;class name&quot;,&quot;selector&quot;:&quot;user-logout-icon&quot;}
+Command duration or timeout: 2.40 seconds
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: &apos;2.47.1&apos;, revision: &apos;unknown&apos;, time: &apos;2015-07-30 11:02:44&apos;
 System info: host: &apos;C3700100527&apos;, ip: &apos;10.244.40.99&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_60&apos;
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
 Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=41.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
-Session ID: eac23965-f020-4fd2-b735-6438450531e7
-*** Element info: {Using=id, value=r_email}
+Session ID: 533c8f0a-c0ae-4d00-bb26-e63b2071f238
+*** Element info: {Using=class name, value=user-logout-icon}
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
@@ -93,14 +93,18 @@ Session ID: eac23965-f020-4fd2-b735-6438450531e7
 	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:595)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:348)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:389)
-	at org.openqa.selenium.By$ById.findElement(By.java:215)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByClassName(RemoteWebDriver.java:429)
+	at org.openqa.selenium.By$ByClassName.findElement(By.java:388)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:340)
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at com.sun.proxy.$Proxy6.sendKeys(Unknown Source)
-	at LoginPage.login(LoginPage.java:22)
-	at test1.fireFoxEmagCreateAccountTest(test1.java:113)
+	at com.sun.proxy.$Proxy5.getCoordinates(Unknown Source)
+	at org.openqa.selenium.interactions.internal.MouseAction.getActionLocation(MouseAction.java:51)
+	at org.openqa.selenium.interactions.internal.MouseAction.moveToLocation(MouseAction.java:58)
+	at org.openqa.selenium.interactions.ButtonReleaseAction.perform(ButtonReleaseAction.java:43)
+	at org.openqa.selenium.interactions.CompositeAction.perform(CompositeAction.java:50)
+	at DefaultPage.logout(DefaultPage.java:34)
+	at test1.fireFoxEmagCreateAccountTest(test1.java:108)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -125,26 +129,26 @@ Session ID: eac23965-f020-4fd2-b735-6438450531e7
 	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
-Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;r_email&quot;}
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;class name&quot;,&quot;selector&quot;:&quot;user-logout-icon&quot;}
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: &apos;2.47.1&apos;, revision: &apos;unknown&apos;, time: &apos;2015-07-30 11:02:44&apos;
 System info: host: &apos;C3700100527&apos;, ip: &apos;10.244.40.99&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_60&apos;
 Driver info: driver.version: unknown
-	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10667)
-	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElement(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10676)
-	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12643)
-	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12648)
-	at &lt;anonymous class&gt;.DelayedCommand.prototype.execute/&lt;(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12590)
-</pre></div><a href='#' onClick='toggleBox("stack-trace332873513", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace332873513'><pre>org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"id","selector":"r_email"}
-Command duration or timeout: 2.66 seconds
+	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10667)
+	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElement(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10676)
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12643)
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12648)
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.execute/&lt;(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12590)
+</pre></div><a href='#' onClick='toggleBox("stack-trace800088638", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace800088638'><pre>org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"class name","selector":"user-logout-icon"}
+Command duration or timeout: 2.40 seconds
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '2.47.1', revision: 'unknown', time: '2015-07-30 11:02:44'
 System info: host: 'C3700100527', ip: '10.244.40.99', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_60'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
 Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=41.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
-Session ID: eac23965-f020-4fd2-b735-6438450531e7
-*** Element info: {Using=id, value=r_email}
+Session ID: 533c8f0a-c0ae-4d00-bb26-e63b2071f238
+*** Element info: {Using=class name, value=user-logout-icon}
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
@@ -153,14 +157,18 @@ Session ID: eac23965-f020-4fd2-b735-6438450531e7
 	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:595)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:348)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:389)
-	at org.openqa.selenium.By$ById.findElement(By.java:215)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByClassName(RemoteWebDriver.java:429)
+	at org.openqa.selenium.By$ByClassName.findElement(By.java:388)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:340)
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at com.sun.proxy.$Proxy6.sendKeys(Unknown Source)
-	at LoginPage.login(LoginPage.java:22)
-	at test1.fireFoxEmagCreateAccountTest(test1.java:113)
+	at com.sun.proxy.$Proxy5.getCoordinates(Unknown Source)
+	at org.openqa.selenium.interactions.internal.MouseAction.getActionLocation(MouseAction.java:51)
+	at org.openqa.selenium.interactions.internal.MouseAction.moveToLocation(MouseAction.java:58)
+	at org.openqa.selenium.interactions.ButtonReleaseAction.perform(ButtonReleaseAction.java:43)
+	at org.openqa.selenium.interactions.CompositeAction.perform(CompositeAction.java:50)
+	at DefaultPage.logout(DefaultPage.java:34)
+	at test1.fireFoxEmagCreateAccountTest(test1.java:108)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -185,19 +193,19 @@ Session ID: eac23965-f020-4fd2-b735-6438450531e7
 	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
-Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"id","selector":"r_email"}
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"class name","selector":"user-logout-icon"}
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '2.47.1', revision: 'unknown', time: '2015-07-30 11:02:44'
 System info: host: 'C3700100527', ip: '10.244.40.99', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_60'
 Driver info: driver.version: unknown
-	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10667)
-	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElement(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10676)
-	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12643)
-	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12648)
-	at &lt;anonymous class&gt;.DelayedCommand.prototype.execute/&lt;(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous1290178206039856542webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12590)
+	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10667)
+	at &lt;anonymous class&gt;.FirefoxDriver.prototype.findElement(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10676)
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12643)
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.executeInternal_(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12648)
+	at &lt;anonymous class&gt;.DelayedCommand.prototype.execute/&lt;(file:///C:/Users/v3790128/AppData/Local/Temp/anonymous7948310190878127218webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12590)
 </pre></div></td>
-<td>16</td>
-<td>test1@1349883</td></tr>
+<td>14</td>
+<td>test1@4a83a74a</td></tr>
 </table><p>
 </body>
 </html>

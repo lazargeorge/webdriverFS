@@ -31,8 +31,8 @@ public class DefaultPage extends Base
     public void logout()
     {
         Actions mouseHover = new Actions(driver);
-        mouseHover.moveToElement(dropDownMenu).build().perform();
-        logout.click();
+        mouseHover.moveToElement(dropDownMenu).click(logout).release(logout).build().perform();
+        // logout.click();
     }
 
     public void addToCart()

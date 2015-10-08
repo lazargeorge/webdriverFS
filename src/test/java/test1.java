@@ -29,14 +29,14 @@ public class test1 extends Base
         nrProduse = 0;
         System.out.println(rndEmail);
         System.out.println(rndPass);
-
+        setDriver("Fire_Fox");
     }
 
-    @AfterSuite
-    public void close()
-    {
-        driver.quit();
-    }
+    // @AfterSuite
+    // public void close()
+    // {
+    // driver.quit();
+    // }
 
     /**
      * Verify if name is good
@@ -53,7 +53,6 @@ public class test1 extends Base
     public void addToCartAndRemoveFromCartTest()
     {
 
-        setDriver("Fire_Fox");
         DefaultPage defaultPage = new DefaultPage();
 
         /*
@@ -102,7 +101,7 @@ public class test1 extends Base
     @Test
     public void fireFoxEmagCreateAccountTest() throws InterruptedException
     {
-        setDriver("Fire_Fox");
+
         CreateAccountPage createPage = PageFactory.initElements(driver, CreateAccountPage.class);
         createPage.createAccount();
         DefaultPage defaultPage = PageFactory.initElements(driver, DefaultPage.class);
