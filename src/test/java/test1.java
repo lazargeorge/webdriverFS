@@ -43,10 +43,73 @@ public class test1 {
 
 	@Test
 	/**
+	 * Click on Autentificare, no mail, no pass
+	 */
+	public void testLoginNoInfo() {
+		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
+		login.click();
+		WebElement ClickAuth = ff.findElement(By.xpath("//input[@title=' Autentifica-te ']"));
+		ClickAuth.click();
+		Assert.assertEquals(ff.findElement(By.xpath("//td[@class='messageStackError']")).getText(),
+				" Eroare: Nu s-a gasit nici o inregistrare pentru adresa E-Mail si/sau Parola introduse.");
+	}
+	
+	@Test
+	/**
+	 * Click on Autentificare, Enter mail, no pass
+	 */
+	public void testLoginNoPass() {
+		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
+		login.click();
+		WebElement EnterEmail = ff.findElement(By.id("email_address"));
+		EnterEmail.sendKeys("cata_lucky@yahoo.com");
+		WebElement ClickAuth = ff.findElement(By.xpath("//input[@title=' Autentifica-te ']"));
+		ClickAuth.click();
+		Assert.assertEquals(ff.findElement(By.xpath("//td[@class='messageStackError']")).getText(),
+				" Eroare: Nu s-a gasit nici o inregistrare pentru adresa E-Mail si/sau Parola introduse.");
+	}
+	
+	@Test
+	/**
+	 * Click on Autentificare, Enter mail with 2x@@
+	 */
+	public void testLoginDouble() {
+		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
+		login.click();
+		WebElement EnterEmail = ff.findElement(By.id("email_address"));
+		EnterEmail.sendKeys("cata_lucky@@yahoo.com");
+		WebElement EnterPassword = ff.findElement(By.name("passwordx"));
+		EnterPassword.sendKeys("password");
+		WebElement ClickAuth = ff.findElement(By.xpath("//input[@title=' Autentifica-te ']"));
+		ClickAuth.click();
+		Assert.assertEquals(ff.findElement(By.xpath("//td[@class='messageStackError']")).getText(),
+				" Eroare: Nu s-a gasit nici o inregistrare pentru adresa E-Mail si/sau Parola introduse.");
+	}
+	
+	@Test
+	/**
+	 * Click on Autentificare, Enter mail symbol
+	 */
+	public void testLoginUserWithSymbol() {
+		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
+		login.click();
+		WebElement EnterEmail = ff.findElement(By.id("email_address"));
+		EnterEmail.sendKeys("cata_l#ucky@yahoo.com");
+		WebElement EnterPassword = ff.findElement(By.name("passwordx"));
+		EnterPassword.sendKeys("password");
+		WebElement ClickAuth = ff.findElement(By.xpath("//input[@title=' Autentifica-te ']"));
+		ClickAuth.click();
+		Assert.assertEquals(ff.findElement(By.xpath("//td[@class='messageStackError']")).getText(),
+				" Eroare: Nu s-a gasit nici o inregistrare pentru adresa E-Mail si/sau Parola introduse.");
+	}
+
+	@Test
+	/**
 	 * Click on Autentificare, Enter user/pass, Add 1st Element to cart, Remove
 	 * from cart, Click on Deconectare
 	 */
-	public void testLoginAddCartDisconnect() {
+	public void testLoginAddCartDisconnect() throws Exception {
+
 		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
 		login.click();
 		WebElement EnterEmail = ff.findElement(By.id("email_address"));
@@ -57,9 +120,13 @@ public class test1 {
 		ClickAuth.click();
 		WebElement Home = ff.findElement(By.xpath("//a[@href='http://www.oktal.ro']/img"));
 		Home.click();
+		Thread.sleep(3000);
+
+		Assert.assertTrue(ff.findElement(By.xpath("//a[text()='Contul meu']")).isDisplayed());
+		Assert.assertTrue(ff.findElement(By.xpath("//a[text()='Deconectare']")).isDisplayed());
+
 		WebElement SelectProd = ff.findElement(By.xpath("//div[@class='prima_poza']/a"));
 		SelectProd.click();
-
 		WebElement AddCart = ff.findElement(By.xpath("//input[@class='buton_comanda']"));
 		AddCart.click();
 		Assert.assertEquals(ff.findElement(By.xpath("//div[@id='ecqcosb']")).getText(), "1", "verificaaddelement");
@@ -86,9 +153,9 @@ public class test1 {
 		String pwd = genID();
 		String mail = genID();
 		Random nr = new Random();
-		
+
 		ff.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		WebElement login = ff.findElement(By.xpath("//span[@id='autentificare_tttip']/a"));
 		login.click();
 		WebElement enterNume = ff.findElement(By.xpath("//input[@name='firstname']"));

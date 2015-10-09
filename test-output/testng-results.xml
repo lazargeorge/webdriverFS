@@ -2,24 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="16476" started-at="2015-10-02T10:25:04Z" finished-at="2015-10-02T10:25:21Z">
+  <suite name="Default suite" duration-ms="8802" started-at="2015-10-09T13:44:00Z" finished-at="2015-10-09T13:44:09Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="16476" started-at="2015-10-02T10:25:04Z" finished-at="2015-10-02T10:25:21Z">
-      <class name="test1">
-        <test-method status="PASS" signature="startFirefox()[pri:0, instance:test1@3ac3fd8b]" name="startFirefox" is-config="true" duration-ms="12591" started-at="2015-10-02T13:25:04Z" finished-at="2015-10-02T13:25:17Z">
+    <test name="Default test" duration-ms="8802" started-at="2015-10-09T13:44:00Z" finished-at="2015-10-09T13:44:09Z">
+      <class name="Tests">
+        <test-method status="PASS" signature="LoginNoPass()[pri:0, instance:Tests@4c203ea1]" name="LoginNoPass" duration-ms="8783" started-at="2015-10-09T16:44:00Z" finished-at="2015-10-09T16:44:09Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- startFirefox -->
-        <test-method status="PASS" signature="testNewUser()[pri:0, instance:test1@3ac3fd8b]" name="testNewUser" duration-ms="3860" started-at="2015-10-02T13:25:17Z" finished-at="2015-10-02T13:25:21Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testNewUser -->
-        <test-method status="PASS" signature="closeFirefox()[pri:0, instance:test1@3ac3fd8b]" name="closeFirefox" is-config="true" duration-ms="11" started-at="2015-10-02T13:25:21Z" finished-at="2015-10-02T13:25:21Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeFirefox -->
-      </class> <!-- test1 -->
+        </test-method> <!-- LoginNoPass -->
+      </class> <!-- Tests -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
