@@ -19,16 +19,17 @@ import org.testng.annotations.Test;
 public class test1 extends Base
 {
 
+    
     Base basicInfo = new Base();
 
     @BeforeTest
     public void createAccounts()
     {
-        generateEmail();
-        generatePass();
-        nrProduse = 0;
-        System.out.println(rndEmail);
-        System.out.println(rndPass);
+//        generateEmail();
+//        generatePass();
+//        nrProduse = 0;
+//        System.out.println(rndEmail);
+//        System.out.println(rndPass);
         setDriver("Fire_Fox");
     }
 
@@ -49,45 +50,45 @@ public class test1 extends Base
         Assert.assertEquals(username, user.getText());
     }
 
-    @Test(dependsOnMethods = { "fireFoxEmagCreateAccountTest" })
-    public void addToCartAndRemoveFromCartTest()
-    {
-
-        DefaultPage defaultPage = new DefaultPage();
-
-        /*
-         * Select the first laptop
-         * Add it to cart
-         * Click on my cart
-         */
-        Actions mouseHover = new Actions(driver);
-        mouseHover.moveToElement(driver.findElement(By.xpath("//a[text()=\"Laptop, Tablete & Telefoane\"]"))).build().perform();
-        driver.findElement(By.xpath("//a[@href=\"/laptopuri/c?ref=hp_menu_link_1_3&tree_ref=3\"]")).click();
-        driver.findElement(By.xpath("//div[@id=\"poza0\"]")).click();
-        defaultPage.addToCart();
-
-        /*
-         * Verify if there are items inside the cart
-         */
-        driver.findElement(By.xpath("//div[@id=\"emg-mini-cart\"]")).click();
-        WebElement cart = driver.findElement(By.xpath("//span[@class=\"emg-cart-bubble\"]"));
-        if (cart.getText() != "0")
-            Assert.assertEquals(1, 1, "verificare cos");
-        else
-            Assert.assertEquals(0, 1, "verificare cos");
-
-        /*
-         * remove the items from cart and check
-         */
-
-        defaultPage.removeFromCart(produse[0], 0);
-
-        if (existsElement("//p[@class=\"avertisment\"]"))
-            Assert.assertEquals(1, 1, "verificare stergere cos");
-        else
-            Assert.assertEquals(0, 1, "verificarestergerecos");
-
-    }
+//    @Test(dependsOnMethods = { "fireFoxEmagCreateAccountTest" })
+//    public void addToCartAndRemoveFromCartTest()
+//    {
+//
+//        DefaultPage defaultPage = PageFactory.initElements(driver, DefaultPage.class);
+//        CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
+//        /*
+//         * Select the first laptop
+//         * Add it to cart
+//         * Click on my cart
+//         */
+//        Actions mouseHover = new Actions(driver);
+//        mouseHover.moveToElement(driver.findElement(By.xpath("//a[text()=\"Laptop, Tablete & Telefoane\"]"))).build().perform();
+//        driver.findElement(By.xpath("//a[@href=\"/laptopuri/c?ref=hp_menu_link_1_3&tree_ref=3\"]")).click();
+//        driver.findElement(By.xpath("//div[@id=\"poza0\"]")).click();
+//        defaultPage.addToCart();
+//
+//        /*
+//         * Verify if there are items inside the cart
+//         */
+//        driver.findElement(By.xpath("//div[@id=\"emg-mini-cart\"]")).click();
+//        WebElement cart = driver.findElement(By.xpath("//span[@class=\"emg-cart-bubble\"]"));
+//        if (cart.getText() != "0")
+//            Assert.assertEquals(1, 1, "verificare cos");
+//        else
+//            Assert.assertEquals(0, 1, "verificare cos");
+//
+//        /*
+//         * remove the items from cart and check
+//         */
+//
+//        cartPage.removeFromCart(produse[0], 0);
+//
+//        if (existsElement("//p[@class=\"avertisment\"]"))
+//            Assert.assertEquals(1, 1, "verificare stergere cos");
+//        else
+//            Assert.assertEquals(0, 1, "verificarestergerecos");
+//
+//    }
 
     /**
      * Create a random email and pass word and create an acount on emag.ro
@@ -101,17 +102,92 @@ public class test1 extends Base
     @Test
     public void fireFoxEmagCreateAccountTest() throws InterruptedException
     {
-
+        String rndEmail = generateEmail();
+        String rndPass = generatePass();
+        
         CreateAccountPage createPage = PageFactory.initElements(driver, CreateAccountPage.class);
-        createPage.createAccount();
+        createPage.createAccount("asdf guy",rndEmail,rndPass);
         DefaultPage defaultPage = PageFactory.initElements(driver, DefaultPage.class);
         defaultPage.logout();
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+//        driver.navigate("http://www.emag.ro/user/login")
+//        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+        LoginPage loginPage = new LoginPage(driver).get();
+        loginPage.load();
         loginPage.login(rndEmail, rndPass);
         verificareUsername("asdf guy");
         defaultPage.logout();
         verificationEmail(rndEmail);
 
     }
+    
+//    @Test
+//    public void loginTest()
+//    {
+//        CreateAccountPage createPage = PageFactory.initElements(driver, CreateAccountPage.class);
+//        createPage.createAccount();
+//        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+//        loginPage.login(rndEmail, rndPass);
+//        verificareUsername("asdf guy");
+//    }
 
+    
+    /**
+     * generates random password
+     */
+    public String generatePass()
+    {
+        String rndPass = "";
+
+        for (int i = 1; i <= 12; i++)
+        {
+            int ok = 0;
+            while (ok != 1)
+            {
+                int ascii = rand.nextInt(123);
+                if (ascii >= 48 && ascii <= 57)
+                {
+                    rndPass += Character.toString((char) ascii);
+                    ok = 1;
+                }
+                else if (ascii >= 65 && ascii <= 90 || ascii >= 97 && ascii <= 122)
+                {
+                    rndPass += Character.toString((char) ascii);
+                    ok = 1;
+                }
+            }
+        }
+        return rndPass;
+    }
+
+    
+    /**
+     * generates random email adress
+     */
+    public String generateEmail()
+    {
+        String rndEmail = "";
+        
+        for (int i = 1; i <= 12; i++)
+        {
+            int ok = 0;
+            while (ok != 1)
+            {
+                int ascii = rand.nextInt(123);
+                if (ascii >= 48 && ascii <= 57)
+                {
+                    rndEmail += Character.toString((char) ascii);
+                    ok = 1;
+                }
+                else if (ascii >= 65 && ascii <= 90 || ascii >= 97 && ascii <= 122)
+                {
+                    rndEmail += Character.toString((char) ascii);
+                    ok = 1;
+                }
+            }
+        }
+
+        rndEmail += "@yopmail.com";
+        return rndEmail;
+    }
+    
 }

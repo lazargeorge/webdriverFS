@@ -12,67 +12,13 @@ public class Base
 
     static WebDriver fireFox = new FirefoxDriver();
     static WebDriver driver;
-    static String rndEmail;
-    static String rndPass;
     static String[] produse = new String[100];
     static int nrProduse;
     Random rand = new Random();
 
-    /**
-     * generates random email adress
-     */
-    public String generateEmail()
-    {
-        for (int i = 1; i <= 12; i++)
-        {
-            int ok = 0;
-            while (ok != 1)
-            {
-                int ascii = rand.nextInt(123);
-                if (ascii >= 48 && ascii <= 57)
-                {
-                    rndEmail += Character.toString((char) ascii);
-                    ok = 1;
-                }
-                else if (ascii >= 65 && ascii <= 90 || ascii >= 97 && ascii <= 122)
-                {
-                    rndEmail += Character.toString((char) ascii);
-                    ok = 1;
-                }
-            }
-        }
 
-        rndEmail += "@yopmail.com";
-        return rndEmail;
-    }
 
-    /**
-     * generates random password
-     */
-    public String generatePass()
-    {
-
-        for (int i = 1; i <= 12; i++)
-        {
-            int ok = 0;
-            while (ok != 1)
-            {
-                int ascii = rand.nextInt(123);
-                if (ascii >= 48 && ascii <= 57)
-                {
-                    rndPass += Character.toString((char) ascii);
-                    ok = 1;
-                }
-                else if (ascii >= 65 && ascii <= 90 || ascii >= 97 && ascii <= 122)
-                {
-                    rndPass += Character.toString((char) ascii);
-                    ok = 1;
-                }
-            }
-        }
-        return rndPass;
-    }
-
+  
     public boolean existsElement(String id)
     {
         try
