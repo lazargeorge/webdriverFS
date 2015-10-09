@@ -1,19 +1,14 @@
 package Tests;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import junit.framework.Assert;
-import pageObjects.HomePage;
+import pageObjects.AccountPage;
 import pageObjects.LoginPage;
 
 public class CreateAccountAndLoginTest extends Setup
 {
-    WebDriver driver = new FirefoxDriver();
-    int random = 100 + (int) (Math.random() * ((10000 - 100) + 1));
 
     /**
      * Test for creating an account
@@ -23,19 +18,17 @@ public class CreateAccountAndLoginTest extends Setup
      */
 
     @Test
-    public void CreateAccountTest() throws Exception
+    public void CreateAccountTest() throws InterruptedException
     {
-        driver.get("http://www.evomag.ro");
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        String nume_generat = "Sandel" + random;
-        HomePage.link_ContulMeu(driver).click();
-        LoginPage.name(driver).sendKeys(nume_generat);
-        LoginPage.email_create(driver).sendKeys(nume_generat + "@test.com");
-        LoginPage.password_create(driver).sendKeys("testtesttest");
-        LoginPage.register_button(driver).click();
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
-        Assert.assertEquals(nume_generat, HomePage.nume_ContulMeu(driver).getText());
+        loginPage.Create_Account_Valid("1234567");
 
+        AccountPage accountPage = PageFactory.initElements(driver, AccountPage.class);
+        Assert.assertTrue(accountPage.date_personale.isDisplayed());
+        Assert.assertTrue(accountPage.nume_ContulMeu.isDisplayed());
+        
+        LoginPage.Logout();
     }
 
     /**
@@ -47,15 +40,11 @@ public class CreateAccountAndLoginTest extends Setup
      */
 
     @Test
-    public void NegativeCreateAccountTest() throws Exception
+    public void NegativeCreateAccountTest() throws InterruptedException
     {
-        driver.get("http://www.evomag.ro");
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        HomePage.link_ContulMeu(driver).click();
-        LoginPage.name(driver).sendKeys("1324");
-        LoginPage.email_create(driver).sendKeys("1234");
-        LoginPage.password_create(driver).sendKeys("1234");
-        LoginPage.register_button(driver).click();
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+
+        loginPage.Create_Account_Invalid("abc", "bcom", "123");
 
         String alert_text = driver.switchTo().alert().getText();
         driver.switchTo().alert().accept();

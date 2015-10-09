@@ -1,7 +1,6 @@
 package Tests;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import junit.framework.Assert;
@@ -10,21 +9,21 @@ import pageObjects.LoginPage;
 
 public class LoginTest extends Setup
 {
-    WebDriver driver = new FirefoxDriver();
-
     /**
      * This is a simple login test
      */
 
     @Test
-    public void Login() throws Exception
+    public void Log() throws InterruptedException
     {
-        driver.get("http://www.evomag.ro/client/auth");
-        LoginPage.email_login(driver).sendKeys("silviu.moraru@yahoo.com");
-        LoginPage.password_login(driver).sendKeys("testwd123");
-        LoginPage.login_button(driver).click();
 
-        Assert.assertEquals("Silviu M.", HomePage.nume_ContulMeu(driver).getText());
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
+        loginPage.Login("silviu.moraru@yahoo.com", "testwd123");
+
+        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+
+        homePage.go_Home(driver);
+        Assert.assertEquals("Silviu M.", homePage.getNume_ContulMeu());
     }
 }
