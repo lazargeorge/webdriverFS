@@ -69,6 +69,24 @@ public class CreateAccountPage {
 
 	}
 
+	public void createSpecificAccount(String nume, String prenume, String mail, String pwd, String telefon,
+			String adresa, String judet, String localitate) {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		inputNume.sendKeys(nume);
+		inputPrenume.sendKeys(prenume);
+		inputMail.sendKeys(mail);
+		inputPassword.sendKeys(pwd);
+		inputPassword2.sendKeys(pwd);
+		inputPhone.sendKeys(telefon);
+		inputAdress.sendKeys(adresa);
+		Select selectJudet = new Select(inputJudet);
+		selectJudet.selectByValue(judet);
+		Select selectLocalitate = new Select(inputLocalitate);
+		selectLocalitate.selectByValue(localitate);
+		clickCreate.click();
+
+	}
+
 	public String randomString() {
 		return new BigInteger(130, random).toString(32);
 	}
