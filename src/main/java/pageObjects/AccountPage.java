@@ -4,13 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * @author Silviu Moraru
+ */
+
 public class AccountPage
 {
     WebDriver driver;
 
     @FindBy(css = ".detalii_cont_container>table>tbody")
     public WebElement date_personale;
-    
+
     @FindBy(css = ".c_header>em")
     public WebElement nume_ContulMeu;
 

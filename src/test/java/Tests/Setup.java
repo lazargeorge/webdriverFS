@@ -10,11 +10,17 @@ import org.testng.annotations.BeforeTest;
 
 import pageObjects.HomePage;
 
+/**
+ * @author Silviu Moraru
+ */
+
 public class Setup
 {
 
     WebDriver driver;
-
+/**
+ * This environment setup initialises the Webdriver, goes to the website's URL and has a "back-to-homepage" mechanism in case the homepage has a redirect
+ */
     @BeforeTest
     public void setupEnvironment()
     {

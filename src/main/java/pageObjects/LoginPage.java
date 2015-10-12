@@ -5,7 +5,10 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+/**
+ * @author Silviu Moraru
+ */
 
 public class LoginPage
 {
@@ -56,7 +59,7 @@ public class LoginPage
         password_create.sendKeys(password);
         register_button.click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
- 
+
     }
 
     public void Create_Account_Invalid(String name_inv, String email_inv, String password_inv)
@@ -66,10 +69,10 @@ public class LoginPage
         password_create.sendKeys(password_inv);
         register_button.click();
     }
-    
+
     public static void Logout()
     {
-       driver.get("http://www.evomag.ro/client/logout");
+        driver.get("http://www.evomag.ro/client/logout");
     }
 
 }

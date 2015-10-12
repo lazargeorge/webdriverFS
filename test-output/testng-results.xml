@@ -1,96 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" total="1" passed="0">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="16987" started-at="2015-09-30T12:55:55Z" finished-at="2015-09-30T12:56:12Z">
+  <suite name="Default suite" duration-ms="24467" started-at="2015-10-12T08:29:17Z" finished-at="2015-10-12T08:29:42Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="16987" started-at="2015-09-30T12:55:55Z" finished-at="2015-09-30T12:56:12Z">
-      <class name="Tests.LoginTest">
-        <test-method status="PASS" signature="setupEnvironment()[pri:0, instance:Tests.LoginTest@723ca036]" name="setupEnvironment" is-config="true" duration-ms="10335" started-at="2015-09-30T15:55:55Z" finished-at="2015-09-30T15:56:06Z">
+    <test name="Default test" duration-ms="24467" started-at="2015-10-12T08:29:17Z" finished-at="2015-10-12T08:29:42Z">
+      <class name="Tests.AddToCartRemoveFromCartTest">
+        <test-method status="PASS" signature="setupEnvironment()[pri:0, instance:Tests.AddToCartRemoveFromCartTest@49e4cb85]" name="setupEnvironment" is-config="true" duration-ms="10937" started-at="2015-10-12T11:29:17Z" finished-at="2015-10-12T11:29:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupEnvironment -->
-        <test-method status="FAIL" signature="Login()[pri:0, instance:Tests.LoginTest@723ca036]" name="Login" duration-ms="6627" started-at="2015-09-30T15:56:06Z" finished-at="2015-09-30T15:56:12Z">
-          <exception class="org.openqa.selenium.NoSuchElementException">
-            <message>
-              <![CDATA[Unable to locate element: {"method":"css selector","selector":".c_header>em"}
-Command duration or timeout: 980 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '2.47.1', revision: 'unknown', time: '2015-07-30 11:02:44'
-System info: host: 'C3700100528', ip: '10.244.40.211', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_60'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=41.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
-Session ID: 82188499-458a-4e99-b8ab-33ec0697ce14
-*** Element info: {Using=css selector, value=.c_header>em}]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"css selector","selector":".c_header>em"}
-Command duration or timeout: 980 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '2.47.1', revision: 'unknown', time: '2015-07-30 11:02:44'
-System info: host: 'C3700100528', ip: '10.244.40.211', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_60'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=41.0, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
-Session ID: 82188499-458a-4e99-b8ab-33ec0697ce14
-*** Element info: {Using=css selector, value=.c_header>em}
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:595)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:348)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:437)
-	at org.openqa.selenium.By$ByCssSelector.findElement(By.java:426)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:340)
-	at Tests.LoginTest.Login(LoginTest.java:50)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
-	at org.testng.TestRunner.privateRun(TestRunner.java:773)
-	at org.testng.TestRunner.run(TestRunner.java:623)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
-	at org.testng.TestNG.run(TestNG.java:1018)
-	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:112)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:205)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:176)
-Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"css selector","selector":".c_header>em"}
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '2.47.1', revision: 'unknown', time: '2015-07-30 11:02:44'
-System info: host: 'C3700100528', ip: '10.244.40.211', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_60'
-Driver info: driver.version: unknown
-	at <anonymous class>.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/v3790129/AppData/Local/Temp/anonymous4985988666253649755webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10667)
-	at <anonymous class>.FirefoxDriver.prototype.findElement(file:///C:/Users/v3790129/AppData/Local/Temp/anonymous4985988666253649755webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10676)
-	at <anonymous class>.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/v3790129/AppData/Local/Temp/anonymous4985988666253649755webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12643)
-	at <anonymous class>.DelayedCommand.prototype.executeInternal_(file:///C:/Users/v3790129/AppData/Local/Temp/anonymous4985988666253649755webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12648)
-	at <anonymous class>.DelayedCommand.prototype.execute/<(file:///C:/Users/v3790129/AppData/Local/Temp/anonymous4985988666253649755webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12590)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+        <test-method status="PASS" signature="AddToBasket()[pri:0, instance:Tests.AddToCartRemoveFromCartTest@49e4cb85]" name="AddToBasket" duration-ms="7264" started-at="2015-10-12T11:29:28Z" finished-at="2015-10-12T11:29:36Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Login -->
-        <test-method status="PASS" signature="closeEverything()[pri:0, instance:Tests.LoginTest@723ca036]" name="closeEverything" is-config="true" duration-ms="8" started-at="2015-09-30T15:56:12Z" finished-at="2015-09-30T15:56:12Z">
+        </test-method> <!-- AddToBasket -->
+        <test-method status="PASS" signature="EmptyBasket()[pri:0, instance:Tests.AddToCartRemoveFromCartTest@49e4cb85]" name="EmptyBasket" duration-ms="6249" started-at="2015-10-12T11:29:36Z" finished-at="2015-10-12T11:29:42Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- closeEverything -->
-      </class> <!-- Tests.LoginTest -->
+        </test-method> <!-- EmptyBasket -->
+        <test-method status="PASS" signature="exit()[pri:0, instance:Tests.AddToCartRemoveFromCartTest@49e4cb85]" name="exit" is-config="true" duration-ms="8" started-at="2015-10-12T11:29:42Z" finished-at="2015-10-12T11:29:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- exit -->
+      </class> <!-- Tests.AddToCartRemoveFromCartTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

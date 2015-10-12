@@ -7,14 +7,18 @@ import org.testng.annotations.Test;
 import pageObjects.CartPage;
 import pageObjects.ProductPage;
 
+/**
+ * @author Silviu Moraru
+ */
+
 public class AddToCartRemoveFromCartTest extends Setup
 {
 
     /**
-     * This test adds 4 products to cart then checks if they are present in the basket at checkout
-     * Step 1: Get the full names of the products then truncate to a more manageable size
-     * Step 2: Add the products to cart
-     * Step 3: Check if all the items are present
+     * This test adds a product to cart then checks if it is present in the basket at checkout
+     * Step 1: Get the full name of the product then truncate to a more manageable size
+     * Step 2: Add the product to cart
+     * Step 3: Check if the item is present
      */
 
     @Test

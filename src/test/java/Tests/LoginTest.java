@@ -7,10 +7,17 @@ import junit.framework.Assert;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
 
+/**
+ * @author Silviu Moraru
+ */
+
 public class LoginTest extends Setup
 {
     /**
      * This is a simple login test
+     * Step1: Go to the Login section of the website
+     * Step2: enter the username and the password
+     * Step3: Check that the login was succesfull
      */
 
     @Test

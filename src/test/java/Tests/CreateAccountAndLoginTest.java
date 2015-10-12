@@ -7,6 +7,10 @@ import junit.framework.Assert;
 import pageObjects.AccountPage;
 import pageObjects.LoginPage;
 
+/**
+ * @author Silviu Moraru
+ */
+
 public class CreateAccountAndLoginTest extends Setup
 {
 
@@ -27,7 +31,7 @@ public class CreateAccountAndLoginTest extends Setup
         AccountPage accountPage = PageFactory.initElements(driver, AccountPage.class);
         Assert.assertTrue(accountPage.date_personale.isDisplayed());
         Assert.assertTrue(accountPage.nume_ContulMeu.isDisplayed());
-        
+
         LoginPage.Logout();
     }
 

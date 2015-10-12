@@ -5,9 +5,9 @@
     <classes>
       <class name="Tests.LoginTest">
         <methods>
-          <include name="closeEverything"/>
+          <include name="exit"/>
+          <include name="Log"/>
           <include name="setupEnvironment"/>
-          <include name="Login"/>
         </methods>
       </class> <!-- Tests.LoginTest -->
     </classes>
