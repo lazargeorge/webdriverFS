@@ -22,7 +22,7 @@ public class AddToCartRemoveFromCartTest extends Setup
      */
 
     @Test
-    public void AddToBasket() throws Exception
+    public void AddToBasket()
     {
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
 
@@ -30,9 +30,7 @@ public class AddToCartRemoveFromCartTest extends Setup
 
         CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
 
-        Assert.assertTrue(cartPage.cos.isDisplayed(), "The cart is being filled");
-        // Assert.assertTrue(productPage.checkProductInCart(), String.format("Produsul {%s} se regaseste in cos", ProductPage.getLap()));
-        // Assert.assertTrue(productPage.checkProductInCart());
+        Assert.assertTrue(cartPage.cos.isDisplayed(), String.format("The cart is being filled"));
     }
 
     /**
@@ -48,6 +46,21 @@ public class AddToCartRemoveFromCartTest extends Setup
 
         cartPage.EmptyCart(driver);
         Assert.assertTrue(cartPage.cos_gol.isDisplayed(), "The cart is empty");
+    }
+
+    @Test
+    public void FailOnPurposeToScreenshot()
+    {
+        try
+        {
+          CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
+        Assert.assertFalse(cartPage.cos_gol.isDisplayed(), "The cart is empty");
+        }
+        
+        catch (Exception e)
+        {
+            Assert.fail();
+        }
     }
 
 }

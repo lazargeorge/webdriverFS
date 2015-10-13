@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage
 {
-    static WebDriver driver;
+    WebDriver driver;
 
     @FindBy(id = "RegisterClientForm_FullName")
     WebElement name;
@@ -44,7 +44,6 @@ public class LoginPage
     public void Login(String email, String password)
     {
         driver.get("http://www.evomag.ro/client/auth");
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         email_login.sendKeys(email);
         password_login.sendKeys(password);
         login_button.click();
@@ -58,8 +57,6 @@ public class LoginPage
         email_create.sendKeys(nume_generat + "@test.com");
         password_create.sendKeys(password);
         register_button.click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
     }
 
     public void Create_Account_Invalid(String name_inv, String email_inv, String password_inv)
@@ -70,7 +67,7 @@ public class LoginPage
         register_button.click();
     }
 
-    public static void Logout()
+    public void Logout()
     {
         driver.get("http://www.evomag.ro/client/logout");
     }

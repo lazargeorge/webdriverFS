@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 /**
  * @author Silviu Moraru
- *
  */
 
 public class ProductPage
@@ -26,14 +25,9 @@ public class ProductPage
         driver.get("http://www.evomag.ro/PORTABILE-Laptopuri/");
     }
 
-    public void nume_produs()
-    {
-        name_produs = produs.getAttribute("alt").substring(6, 30).trim();
-    }
-
     public void buy()
     {
-        nume_produs();
+        name_produs = produs.getAttribute("alt").substring(6, 30).trim();
         System.out.printf("%s\n", name_produs);
         addToCart_produs.click();
     }

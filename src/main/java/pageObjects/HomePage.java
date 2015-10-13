@@ -18,7 +18,10 @@ public class HomePage
     @FindBy(css = ".c_header>em")
     public WebElement nume_ContulMeu;
 
-    @FindBy(css = ".imgResponsive.lazy-hidden")
+//    @FindBy(css = ".imgResponsive.lazy-hidden")
+//    WebElement home;
+    
+    @FindBy(css = ".img_logo")
     WebElement home;
 
     @FindBy(css = ".HeaderWidgetAuth")
