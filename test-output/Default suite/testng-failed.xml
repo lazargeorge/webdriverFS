@@ -5,7 +5,7 @@
     <classes>
       <class name="test1">
         <methods>
-          <include name="fireFoxEmagCreateAccountTest"/>
+          <include name="addToCartAndRemoveFromCartTest"/>
           <include name="createAccounts"/>
         </methods>
       </class>

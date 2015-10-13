@@ -1,51 +1,68 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DefaultPage
+public class DefaultPage extends LoadableComponent<DefaultPage>
 {
 
     WebDriver driver;
-    
+    private WebDriverWait wait;
     @FindBy(how = How.ID, using = "emg-user-menu")
     WebElement dropDownMenu;
-    @FindBy(how = How.XPATH,  using = "//a[contains(@href,'logout')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(@href,'logout')]")
     WebElement logout;
     @FindBy(how = How.ID, using = "add-to-cart-submit")
     WebElement addToCart;
-    @FindBy(how = How.CLASS_NAME, using = "emg-button btn-change-warranty")
+    @FindBy(how = How.XPATH, using = "(//button[@class=\"emg-button btn-change-warranty\"])[1]")
     WebElement changeWarranty;
-    @FindBy(how = How.NAME, using = "service-parent-id")
+    @FindBy(how = How.NAME, using = "service_parrent_id")
     WebElement produs;
 
     public DefaultPage(WebDriver driver)
     {
         this.driver = driver;
-//        driver.get("http://www.emag.ro");
+        PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, 10);
+
     }
 
     /**
      * Logout
-     * @throws InterruptedException 
+     * 
+     * @throws InterruptedException
      */
     public void logout() throws InterruptedException
     {
-//        Actions mouseHover = new Actions(driver);
+
         driver.get("http://www.emag.ro/user/logout");
-//        mouseHover.moveToElement(dropDownMenu).click(logout).build().perform();
-        // logout.click();
+
     }
 
-//    public void addToCart()
-//    {
-//        produse[nrProduse] = produs.getAttribute("value");
-//        nrProduse++;
-//        addToCart.click();
-//        if (existsElement("//button[@class=\"emg-button btn-change-warranty\"]"))
-//            changeWarranty.click();
-//    }
+    @Override
+    protected void load()
+    {
+        driver.get("http://www.emag.ro");
+    }
+
+    @Override
+    protected void isLoaded() throws Error
+    {
+
+        wait.until(ExpectedConditions.visibilityOf(dropDownMenu));
+    }
+
+    public void addToCart(Base b)
+    {
+        b.produse[b.nrProduse] = produs.getAttribute("value");
+        b.nrProduse++;
+        addToCart.click();
+        if (changeWarranty.isDisplayed())
+            changeWarranty.click();
+    }
 
 }

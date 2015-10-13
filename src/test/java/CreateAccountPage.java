@@ -2,11 +2,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CreateAccountPage
+public class CreateAccountPage extends LoadableComponent<CreateAccountPage>
 {
 
     WebDriver driver;
+    private WebDriverWait wait;
     
     @FindBy(how = How.ID, using = "r_name")
     WebElement name;
@@ -23,8 +28,10 @@ public class CreateAccountPage
 
     public CreateAccountPage(WebDriver driver)
     {
-        this.driver = driver;
-        driver.get("https://www.emag.ro/user/register?ref=ssi_login");
+        this.driver =driver;
+        PageFactory.initElements(driver, this); 
+        wait = new WebDriverWait(driver, 10);
+        
     }
 
     /**
@@ -40,16 +47,18 @@ public class CreateAccountPage
         submitBtn.click();
     }
 
-    /**
-     * Create random account
-     */
-//    public void createAccount()
-//    {
-//        name.sendKeys("asdf guy");
-//        emailElement.sendKeys(rndEmail);
-//        passElement.sendKeys(rndPass);
-//        rcpass.sendKeys(rndPass);
-//        acceptTerms.click();
-//        submitBtn.click();
-//    }
+    @Override
+    protected void load()
+    {
+        driver.get("https://www.emag.ro/user/register?ref=ssi_login");
+        
+    }
+
+    @Override
+    protected void isLoaded() throws Error
+    {
+        wait.until(ExpectedConditions.visibilityOf(submitBtn));
+        
+    }
+
 }
