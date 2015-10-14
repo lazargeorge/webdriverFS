@@ -4,7 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -16,7 +17,7 @@ public class test1
     WebDriver driver;
     String rndEmail;
     String rndPass;
-    Base basicInfo = new Base();
+    Base basicInfo;
 
     private LoginPage loginPage;
     private DefaultPage defaultPage;
@@ -24,9 +25,10 @@ public class test1
     private CartPage cartPage;
     private WebDriverWait wait;
 
-    @BeforeMethod
+    @BeforeTest
     public void createAccounts()
     {
+        basicInfo = new Base();
         driver = basicInfo.driver;
         rndEmail = basicInfo.generateEmail();
         rndPass = basicInfo.generatePass();
@@ -36,36 +38,20 @@ public class test1
 
     }
 
-//    @AfterTest
-//    public void close()
-//    {
-//        driver.quit();
-//    }
-
-    /**
-     * Verify if name is good
-     */
-    private boolean verificareUsername(String username)
+    @AfterTest
+    public void close()
     {
-        WebElement user = driver.findElement(By.xpath("//span[text()=\"" + username + "\"]"));
-        System.out.println(user.getText());
-        if (username.compareTo(user.getText())==0)
-            return true;
-        else
-            return false;
+        driver.quit();
     }
 
     @Test
-    public void addToCartAndRemoveFromCartTest()
+    public void addToCartAndRemoveFromCartTest() throws InterruptedException
     {
 
         driver.get("https://www.emag.ro/user/register?ref=ssi_login");
         createPage = new CreateAccountPage(driver).get();
         createPage.createAccount("asdf guy", rndEmail, rndPass);
-        
-        
-        
-       
+
         /*
          * Select the first laptop
          * Add it to cart
@@ -83,12 +69,12 @@ public class test1
          * Verify if there are items inside the cart
          */
         cartPage = new CartPage(driver).get();
-        //driver.findElement(By.xpath("//div[@id=\"emg-mini-cart\"]")).click();
-//        WebElement cart = driver.findElement(By.xpath("//span[@class=\"emg-cart-bubble\"]"));
-//        if (cart.getText() != "0")
-//            Assert.assertEquals(1, 1, "verificare cos");
-//        else
-//            Assert.assertEquals(0, 1, "verificare cos");
+        // driver.findElement(By.xpath("//div[@id=\"emg-mini-cart\"]")).click();
+        WebElement cart = driver.findElement(By.xpath("//span[@class=\"emg-cart-bubble\"]"));
+        if (cart.getText() != "0")
+            Assert.assertEquals(1, 1, "verificare cos");
+        else
+            Assert.assertEquals(0, 1, "verificare cos");
 
         /*
          * remove the items from cart and check
@@ -101,6 +87,8 @@ public class test1
         else
             Assert.assertEquals(0, 1, "verificarestergerecos");
 
+        defaultPage.logout();
+        
     }
 
     /**
@@ -115,6 +103,9 @@ public class test1
     @Test
     public void fireFoxEmagCreateAccountTest() throws InterruptedException
     {
+        rndEmail = basicInfo.generateEmail();
+        rndPass = basicInfo.generatePass();
+        
         driver.get("https://www.emag.ro/user/register?ref=ssi_login");
         createPage = new CreateAccountPage(driver).get();
         createPage.createAccount("asdf guy", rndEmail, rndPass);
@@ -127,7 +118,7 @@ public class test1
         loginPage = new LoginPage(driver).get();
         loginPage.login(rndEmail, rndPass);
 
-        Assert.assertTrue( verificareUsername("asdf guy"),"The username is valid");
+        Assert.assertTrue(basicInfo.verificareUsername("asdf guy"), "The username is valid");
 
         defaultPage.logout();
 
@@ -138,11 +129,10 @@ public class test1
     @Test
     public void loginTest()
     {
-        // driver.get("http://www.emag.ro/user/login");
-        // loginPage =PageFactory.initElements(driver, LoginPage.class);
+
         loginPage = new LoginPage(driver).get();
         loginPage.login("ttO0YO5pTr3a@yopmail.com", "M7gTXA9nMmQW");
-        // verificareUsername("asdf guy");
+
     }
 
 }

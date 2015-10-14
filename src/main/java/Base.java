@@ -16,6 +16,18 @@ public class Base
 
 
 
+    /**
+     * Verify if name is good
+     */
+   public boolean verificareUsername(String username)
+    {
+        WebElement user = driver.findElement(By.xpath("//span[text()=\"" + username + "\"]"));
+        System.out.println(user.getText());
+        if (username.compareTo(user.getText()) == 0)
+            return true;
+        else
+            return false;
+    }
   
     public boolean existsElement(String id)
     {
