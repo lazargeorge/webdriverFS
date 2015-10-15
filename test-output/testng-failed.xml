@@ -5,7 +5,9 @@
     <classes>
       <class name="Tests">
         <methods>
-          <include name="LoginNoMailNoPass"/>
+          <include name="startFirefox"/>
+          <include name="closeFirefox"/>
+          <include name="CreateSpecificAccountTest"/>
         </methods>
       </class> <!-- Tests -->
     </classes>

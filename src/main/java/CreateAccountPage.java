@@ -69,9 +69,8 @@ public class CreateAccountPage {
 
 	}
 
-	public void createSpecificAccount(String nume, String prenume, String mail, String pwd, String telefon,
+	public void createAccount(String nume, String prenume, String mail, String pwd, String telefon,
 			String adresa, String judet, String localitate) {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		inputNume.sendKeys(nume);
 		inputPrenume.sendKeys(prenume);
 		inputMail.sendKeys(mail);
