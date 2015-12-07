@@ -1,4 +1,6 @@
-import org.junit.Before;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,19 +11,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  */
 public class test1 {
 	
-	
-	 public static void main(String[] args) {
-		 WebDriver driver = new FirefoxDriver();
+	 @Test
+	 public void test()
+	 {
+		    WebDriver driver = new FirefoxDriver();
 			driver.get("http://www.elefant.ro");
 			System.out.println(driver.getPageSource());
 			WebElement drop_menu= driver.findElement(By.className("header-account-display"));
 			drop_menu.click();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			
 			 try{
 				 driver.findElement(By.cssSelector("a[href='/autentificare']")).click();
 			 }
 			 catch(Exception e){
 				 System.out.println("nu a fost selectat dropdownul");
 				 drop_menu.click();
+				 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			 }
 			 
 			 try{
@@ -33,6 +39,6 @@ public class test1 {
 				 drop_menu.click();
 				 driver.findElement(By.cssSelector("a[href='/autentificare']")).click();
 			 }
-		
-	}
-}
+	 }
+	 }
+
