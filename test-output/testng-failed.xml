@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Failed suite [Test]" parallel="methods">
+  <parameter name="browser" value="chrome"/>
+  <parameter name="platform" value="Windows"/>
+  <test name="FireFox(failed)" parallel="methods" preserve-order="true">
+    <parameter name="browser" value="firefox"/>
+    <parameter name="platform" value="Windows"/>
+    <classes>
+      <class name="testng_package.test1">
+        <methods>
+          <include name="tearDown"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="setup"/>
+          <include name="login_success"/>
+        </methods>
+      </class> <!-- testng_package.test1 -->
+    </classes>
+  </test> <!-- FireFox(failed) -->
+  <test name="Chrome(failed)" parallel="methods" preserve-order="true">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="platform" value="Windows"/>
+    <classes>
+      <class name="testng_package.test1">
+        <methods>
+          <include name="tearDown"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="setup"/>
+          <include name="login_success"/>
+        </methods>
+      </class> <!-- testng_package.test1 -->
+    </classes>
+  </test> <!-- Chrome(failed) -->
+</suite> <!-- Failed suite [Test] -->
