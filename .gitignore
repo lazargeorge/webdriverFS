@@ -1,0 +1,7 @@
+/screenshots
+/target/
+.classpath
+.project
+.settings/org.eclipse.jdt.core.prefs
+*.prefs
+/test-output/
