@@ -19,25 +19,25 @@ public class test1 extends Base {
 		Assert.assertTrue(waitForElement(test_login.msg_invalid_username).isDisplayed());
 
 	}
-//
-//	@Test
-//	public void login_fail2() {
-//
-//		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);
-//		test_login.log_in("abcd@gmail.com", "d");
-//		
-//		Assert.assertTrue(waitForElement(test_login.msg_logins_password).isDisplayed());
-//
-//
-//	}
-//
-//	@Test
-//	public void login_fail3() {
-//		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);
-//		test_login.log_in("", "pwd");
-//		Assert.assertTrue(waitForElement(test_login.msg_logins_ident).isDisplayed());
-//	}
-//
+
+	@Test
+	public void login_fail2() {
+
+		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);
+		test_login.log_in("abcd@gmail.com", "d");
+		
+		Assert.assertTrue(waitForElement(test_login.msg_logins_password).isDisplayed());
+
+
+	}
+
+	@Test
+	public void login_fail3() {
+		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);
+		test_login.log_in("", "pwd");
+		Assert.assertTrue(waitForElement(test_login.msg_logins_ident).isDisplayed());
+	}
+
 //	@Test
 //	public void login_success() {
 //		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);

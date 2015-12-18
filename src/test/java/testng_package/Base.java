@@ -31,7 +31,21 @@ public class Base {
 	public void setup(@Optional("Firefox") String browser, @Optional("Windows") String platform,
 			@Optional("false") String grid) throws MalformedURLException {
 
-		initDriver(browser, platform, grid);
+		IDriver idriver;
+		switch (grid) {
+		case "false":
+			idriver = new NoGridDriver();
+			driver = idriver.GetDriver(browser, platform, grid);
+			break;
+		case "true":
+			idriver = new GridDriver();
+			driver = idriver.GetDriver(browser, platform, grid);
+			break;
+		default:
+			break;
+		}
+
+		driver.manage().window().maximize();
 		efdriver = new EventFiringWebDriver(driver);
 		oc = new OverrideClass();
 		efdriver.register(oc);
@@ -39,7 +53,7 @@ public class Base {
 
 	@AfterTest
 	public void tearDown() {
-		efdriver.quit(); 
+		efdriver.quit();
 	}
 
 	public WebElement waitForElement(By element) {
@@ -51,39 +65,4 @@ public class Base {
 	public static WebDriver getDriver() {
 		return efdriver;
 	}
-
-	public void initDriver(String browser, String platform, String grid) throws MalformedURLException {
-		switch (grid) {
-		case "false":
-			if (browser.equalsIgnoreCase("firefox")) {
-				driver = new FirefoxDriver();
-			} else {
-				System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
-				driver = new ChromeDriver();
-			}
-			break;
-
-		case "true":
-			if (browser.equalsIgnoreCase("firefox")) {
-				capabilities = DesiredCapabilities.firefox();
-				if (platform.equalsIgnoreCase("Windows"))
-					capabilities.setPlatform(org.openqa.selenium.Platform.WINDOWS);
-				capabilities.setBrowserName("firefox");
-			} else {
-
-				System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
-				capabilities = DesiredCapabilities.chrome();
-				if (platform.equalsIgnoreCase("Windows"))
-					capabilities.setPlatform(org.openqa.selenium.Platform.WINDOWS);
-				capabilities.setBrowserName("chrome");
-			}
-			driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-			break;
-		default:
-			break;
-		}
-		driver.manage().window().maximize();
-
-	}
-
 }
