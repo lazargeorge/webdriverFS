@@ -7,12 +7,12 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 public class OverrideClass implements WebDriverEventListener{
 
 	public void beforeNavigateTo(String url, WebDriver driver) {
-		System.out.println("before navigate to "+url);
+	//	System.out.println("before navigate to "+url);
 		
 	}
 
 	public void afterNavigateTo(String url, WebDriver driver) {
-		System.out.println("after navigate to "+url);
+	//	System.out.println("after navigate to "+url);
 
 		
 	}
@@ -48,12 +48,13 @@ public class OverrideClass implements WebDriverEventListener{
 	}
 
 	public void beforeClickOn(WebElement element, WebDriver driver) {
-		System.out.println("before click on "+element.getText());
+	//System.out.println("before click on "+element.getText());
 		
 	}
 
 	public void afterClickOn(WebElement element, WebDriver driver) {
-		System.out.println("after click on "+element.getText());
+//		System.out.println("after click on "+element.getText());
+	
 		
 	}
 
