@@ -15,7 +15,7 @@ public class test1 extends Base {
 	public void login_fail1() {
 
 		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);
-		test_login.log_in("", "ds");
+		test_login.log_in("xc", "ds");
 		Assert.assertTrue(waitForElement(test_login.msg_invalid_username).isDisplayed());
 
 	}
@@ -24,7 +24,7 @@ public class test1 extends Base {
 	public void login_fail2() {
 
 		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);
-		test_login.log_in("abcd@gmail.com", "d");
+		test_login.log_in("abcd@gmail.com", "");
 		
 		Assert.assertTrue(waitForElement(test_login.msg_logins_password).isDisplayed());
 
@@ -40,6 +40,7 @@ public class test1 extends Base {
 
 	@Test
 	public void login_success() {
+		//contul de login a fost sters, deci da fail
 		LoginPage test_login = PageFactory.initElements(efdriver, LoginPage.class);
 		test_login.log_in();
 		Assert.assertTrue(waitForElement(test_login.contul_meu).isDisplayed());
@@ -77,7 +78,7 @@ public class test1 extends Base {
 		Assert.assertTrue(waitForElement(test_reg.iesire_cont).isDisplayed());
 
 	}
-
+/*
 	@Test
 	public void try_test() {
 
@@ -85,5 +86,5 @@ public class test1 extends Base {
 		Assert.assertTrue(true);
 
 	}
-
+*/
 }

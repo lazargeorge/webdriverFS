@@ -20,7 +20,7 @@ public class NoGridDriver implements IDriver {
 			case "chrome":
 				return getChrome(platform,grid);
 			default:
-				return null;
+				return getFirefox(platform,grid);
 			
 		}
 	}
