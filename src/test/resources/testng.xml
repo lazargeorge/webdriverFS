@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test" verbose="1" parallel="methods" >  
+<listeners>
+       <listener class-name="testng_package.TestListener"/>
+  </listeners>
+	<parameter name="grid" value="false" />
+    <test name="FireFox" >
+	    <parameter name="browser" value="firefox"/>
+	    <parameter name="platform" value="Windows" />
+	    <classes>
+	 	   <class name="testng_package.test1" />
+	    </classes>
+    </test>
+	<test name="Chrome" >
+	    <parameter name="browser" value="chrome"/>
+	    <parameter name="platform" value="Windows" />
+	    <classes>
+	  	  <class name="testng_package.test1" />
+	    </classes>
+	  </test>
+</suite>
