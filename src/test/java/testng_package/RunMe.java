@@ -2,6 +2,7 @@ package testng_package;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
 public class RunMe {
@@ -14,11 +15,13 @@ public class RunMe {
 	@Test
 	public void googleSearch()
 	{
-		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+	//	System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
 		
-		WebDriver driver = new ChromeDriver();
+		WebDriver driver = new FirefoxDriver();
 	
 		driver.get("http://google.com");
+		
+		
 		driver.quit();
 	}
 	
