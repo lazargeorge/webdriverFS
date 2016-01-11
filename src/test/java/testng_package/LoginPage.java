@@ -27,8 +27,9 @@ public class LoginPage {
 	}
 
 	public void log_in() {
-		user.sendKeys("Marcel123");
-		password.sendKeys("marcel123");
+		user.sendKeys("Marcel12");
+		password.clear();
+		password.sendKeys("marcel12");
 		submit.click();
 	}
 

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Test" verbose="1" parallel="methods" >  
+<suite name="Test" verbose="1" parallel="classes" >  
 <listeners>
        <listener class-name="testng_package.TestListener"/>
   </listeners>
 	<parameter name="grid" value="false" />
+	<parameter name="browser" value="firefox"/>
+	<parameter name="platform" value="Windows" />
+	
     <test name="FireFox" >
 	    <parameter name="browser" value="firefox"/>
 	    <parameter name="platform" value="Windows" />
